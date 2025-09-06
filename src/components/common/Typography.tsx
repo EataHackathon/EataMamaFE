@@ -6,7 +6,7 @@ type TypographyColor = 'default' | 'sub' | 'white';
 
 type TypographyProps = {
   variant: TypographyVariant;
-  weight: TypographyWeight;
+  weight?: TypographyWeight;
   color?: TypographyColor;
   children: React.ReactNode;
   as?: React.ElementType;
@@ -14,8 +14,8 @@ type TypographyProps = {
 
 const Typography = ({
   variant,
-  weight,
   children,
+  weight = 'regular',
   color = 'default',
   as = 'p',
 }: TypographyProps) => {

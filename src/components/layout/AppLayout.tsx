@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import styled from '@emotion/styled';
 import TheHeader, { type HeaderType } from './TheHeader';
+import TheNavigation from './TheNavigation';
 
 export type LayoutType = 'none' | HeaderType;
 
@@ -13,8 +14,10 @@ const AppLayout = ({ layoutType = 'none' }: AppLayoutProps) => {
     <Background>
       <Container>
         {layoutType !== 'none' && <TheHeader type={layoutType} />}
-        <Outlet />
-        <footer>Footer</footer>
+        <Main>
+          <Outlet />
+        </Main>
+        <TheNavigation />
       </Container>
     </Background>
   );
@@ -28,9 +31,16 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   min-height: 100dvh;
   background-color: ${({ theme }) => theme.colors.background};
   margin: 0 auto;
   padding: 0;
+`;
+
+const Main = styled.main`
+  flex: 1;
+  padding: ${({ theme }) => theme.spacing[4]};
 `;

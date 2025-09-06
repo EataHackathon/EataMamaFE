@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useTitleStore } from '@/stores';
 import Typography from '../common/Typography';
+import { HEADER_HEIGHT } from '@/constants';
 
 export type HeaderType = 'left' | 'center';
 
@@ -13,7 +14,7 @@ const TheHeader = ({ type }: TheHeaderProps) => {
 
   return (
     <Header type={type}>
-      <Typography variant='title' weight='bold'>
+      <Typography variant='title' weight='bold' as='h1'>
         {title}
       </Typography>
     </Header>
@@ -23,7 +24,7 @@ const TheHeader = ({ type }: TheHeaderProps) => {
 export default TheHeader;
 
 const Header = styled.header<{ type: HeaderType }>`
-  height: 64px;
+  height: ${HEADER_HEIGHT}px;
   text-align: ${(props) => props.type};
   padding: ${({ theme }) => theme.spacing[4]};
 `;
