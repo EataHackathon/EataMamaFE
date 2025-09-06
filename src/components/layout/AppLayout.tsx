@@ -1,17 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import styled from '@emotion/styled';
+import TheHeader, { type HeaderType } from './TheHeader';
 
-export type LayoutType = 'none' | 'left' | 'center';
+export type LayoutType = 'none' | HeaderType;
 
 type AppLayoutProps = {
   layoutType?: LayoutType;
 };
 
-const AppLayout = ({ layoutType = 'left' }: AppLayoutProps) => {
+const AppLayout = ({ layoutType = 'none' }: AppLayoutProps) => {
   return (
     <Background>
       <Container>
-        {layoutType !== 'none' && <Header type={layoutType}>Header</Header>}
+        {layoutType !== 'none' && <TheHeader type={layoutType} />}
         <Outlet />
         <footer>Footer</footer>
       </Container>
@@ -32,9 +33,4 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   margin: 0 auto;
   padding: 0;
-`;
-
-const Header = styled.header<{ type: LayoutType }>`
-  height: 64px;
-  text-align: ${(props) => props.type};
 `;

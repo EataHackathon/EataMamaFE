@@ -6,7 +6,7 @@ import { MainPage, NotFoundPage } from '@/pages';
 const router = createBrowserRouter([
   {
     path: ROUTE_PATH.HOME,
-    element: <AppLayout />,
+    element: <AppLayout layoutType='left' />,
     children: [
       {
         index: true,
