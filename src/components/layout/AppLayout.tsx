@@ -17,7 +17,7 @@ const AppLayout = ({ layoutType = 'none' }: AppLayoutProps) => {
         <Main>
           <Outlet />
         </Main>
-        <TheNavigation />
+        {layoutType !== 'none' && <TheNavigation />}
       </Container>
     </Background>
   );
