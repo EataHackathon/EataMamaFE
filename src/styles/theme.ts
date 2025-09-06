@@ -21,6 +21,7 @@ export const theme = {
     background: '#F8F8F8',
     // 텍스트 색상
     text: {
+      primary: '#e91e63',
       default: gray[100], // 기본 텍스트
       sub: gray[50], // 보조 텍스트
       white: gray[0], // 흰색 텍스트
