@@ -2,14 +2,33 @@ import styled from '@emotion/styled';
 import { CalendarCheck, UserRound, Utensils } from 'lucide-react';
 import NavigationItem from './NavigationItem';
 import { NAV_HEIGHT } from '@/constants';
+import { ROUTE_PATH } from '@/routes/paths';
+import { useLocation } from 'react-router-dom';
 
 const navigationItems = [
-  { id: 1, icon: <CalendarCheck size={30} />, label: '캘린더' },
-  { id: 2, icon: <Utensils size={30} />, label: '내식단' },
-  { id: 3, icon: <UserRound size={30} />, label: '내정보' },
+  {
+    id: 1,
+    icon: <CalendarCheck size={30} />,
+    label: '캘린더',
+    path: ROUTE_PATH.CALENDAR,
+  },
+  {
+    id: 2,
+    icon: <Utensils size={30} />,
+    label: '내식단',
+    path: ROUTE_PATH.DIET,
+  },
+  {
+    id: 3,
+    icon: <UserRound size={30} />,
+    label: '내정보',
+    path: ROUTE_PATH.MY,
+  },
 ];
 
 const TheNavigation = () => {
+  const location = useLocation();
+
   return (
     <Navigation>
       {navigationItems.map((item) => (
@@ -17,7 +36,8 @@ const TheNavigation = () => {
           key={item.id}
           icon={item.icon}
           label={item.label}
-          selected={false}
+          path={item.path}
+          selected={location.pathname === item.path}
         />
       ))}
     </Navigation>

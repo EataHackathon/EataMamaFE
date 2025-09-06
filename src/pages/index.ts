@@ -1,2 +1,5 @@
 export * from './main';
 export * from './not-found';
+export * from './my';
+export * from './diet';
+export * from './calendar';

@@ -1,17 +1,28 @@
 import styled from '@emotion/styled';
 import { Typography } from '../common';
+import { Link } from 'react-router-dom';
 
 type NavigationItemProps = {
   icon: React.ReactNode;
   label: string;
+  path: string;
   selected: boolean;
 };
 
-const NavigationItem = ({ icon, label, selected }: NavigationItemProps) => {
+const NavigationItem = ({
+  icon,
+  label,
+  path,
+  selected,
+}: NavigationItemProps) => {
   return (
-    <Item selected={selected}>
+    <Item to={path} selected={selected}>
       {icon}
-      <Typography variant='label' weight={selected ? 'bold' : 'regular'}>
+      <Typography
+        variant='label'
+        weight={selected ? 'bold' : 'medium'}
+        color={selected ? 'primary' : 'default'}
+      >
         {label}
       </Typography>
     </Item>
@@ -20,7 +31,7 @@ const NavigationItem = ({ icon, label, selected }: NavigationItemProps) => {
 
 export default NavigationItem;
 
-const Item = styled.div<{ selected: boolean }>`
+const Item = styled(Link)<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;

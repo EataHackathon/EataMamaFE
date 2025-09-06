@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 type TypographyVariant = 'title' | 'subtitle' | 'body1' | 'body2' | 'label';
 type TypographyWeight = 'regular' | 'medium' | 'bold';
-type TypographyColor = 'default' | 'sub' | 'white';
+type TypographyColor = 'default' | 'sub' | 'white' | 'primary';
 
 type TypographyProps = {
   variant: TypographyVariant;
