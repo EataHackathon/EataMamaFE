@@ -13,7 +13,7 @@ const ProfileSection = () => {
         </Typography>
       </TypoWrapper>
       <IconWrapper>
-        <IconDiv name='edit' />
+        <IconDiv />
       </IconWrapper>
     </Section>
   );
@@ -40,7 +40,7 @@ const IconWrapper = styled.div`
   justify-content: center;
 `;
 
-const IconDiv = styled.div<{ name: string }>`
+const IconDiv = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50px;
