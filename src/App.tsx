@@ -3,6 +3,7 @@ import { Router } from './routes';
 import { queryClient } from './utils';
 import { Global, ThemeProvider } from '@emotion/react';
 import { GlobalResetStyle, GlobalTypographyStyle, theme } from './styles';
+import { ModalProvider } from './contexts';
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <Global styles={GlobalResetStyle} />
       <Global styles={GlobalTypographyStyle} />
       <QueryClientProvider client={queryClient}>
-        <Router />
+        <ModalProvider>
+          <Router />
+        </ModalProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

@@ -21,7 +21,7 @@ const CalendarPage = () => {
     <Container>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
-        height={`calc(100dvh - ${NAV_HEIGHT}px - ${theme.spacing[8]}px)`}
+        height={`calc(100dvh - ${NAV_HEIGHT}px - ${theme.spacing[8]})`}
         titleFormat={(date) => {
           const year = date.date.year;
           const month = date.date.month + 1;
