@@ -10,4 +10,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'vendor_react';
+            if (id.includes('@fullcalendar')) return 'vendor_fullcalendar';
+          }
+        },
+      },
+    },
+  },
 });
