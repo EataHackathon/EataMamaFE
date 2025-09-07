@@ -8,7 +8,7 @@ const MyPage = () => {
 
   useEffect(() => {
     setTitle('내 프로필');
-  }, []);
+  }, [setTitle]);
 
   return (
     <Container>
