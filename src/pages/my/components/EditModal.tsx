@@ -33,7 +33,7 @@ const EditModal = ({ infoData, setInfoData }: EditModalProps) => {
         <CloseBox onClick={closeModal}>
           <X />
         </CloseBox>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           {formFields.map(({ id, label, unit }) => (
             <InputField key={id}>
               <Label>{label}</Label>
@@ -47,7 +47,7 @@ const EditModal = ({ infoData, setInfoData }: EditModalProps) => {
               <div>{unit}</div>
             </InputField>
           ))}
-          <Button type='submit' onClick={handleSubmit}>
+          <Button type='submit'>
             <Typography variant='body1' weight='bold' color='white'>
               저장
             </Typography>

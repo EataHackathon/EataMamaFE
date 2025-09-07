@@ -33,7 +33,7 @@ const InfoSection = () => {
         <Typography variant='subtitle' weight='medium'>
           개인 정보
         </Typography>
-        <button onClick={() => openModal()}>
+        <button type='button' onClick={() => openModal()}>
           <Typography variant='body2' weight='medium' color='sub'>
             수정
           </Typography>
