@@ -1,15 +1,19 @@
 import FullCalendar from '@fullcalendar/react';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, {
+  type DateClickArg,
+} from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '@/styles/calendar.css';
 import styled from '@emotion/styled';
 import { NAV_HEIGHT } from '@/constants';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
 
 const CalendarPage = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
-  const handleDateClick = (info: { jsEvent: MouseEvent; dateStr: string }) => {
+  const handleDateClick = (info: DateClickArg) => {
     navigate(`/calendar?date=${info.dateStr}`);
   };
 
@@ -17,7 +21,7 @@ const CalendarPage = () => {
     <Container>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
-        height={`calc(100dvh - ${NAV_HEIGHT}px - 32px)`}
+        height={`calc(100dvh - ${NAV_HEIGHT}px - ${theme.spacing[8]}px)`}
         titleFormat={(date) => {
           const year = date.date.year;
           const month = date.date.month + 1;
@@ -35,10 +39,11 @@ const CalendarPage = () => {
           next: '▶',
         }}
         dayCellContent={(arg) => {
-          if (arg.isToday) {
-            return <DayBox variant='today'>{arg.dayNumberText}</DayBox>;
-          }
-          return <DayBox variant='default'>{arg.dayNumberText}</DayBox>;
+          return (
+            <DayBox variant={arg.isToday ? 'today' : 'default'}>
+              {arg.dayNumberText}
+            </DayBox>
+          );
         }}
       />
     </Container>
@@ -59,15 +64,8 @@ const DayBox = styled.div<{ variant: 'default' | 'today' }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme, variant }) => {
-    switch (variant) {
-      case 'today':
-        return theme.colors.primary;
-      default:
-        return theme.colors.background;
-    }
-  }};
-  color: ${({ theme, variant }) => {
-    if (variant === 'today') return theme.colors.text.white;
-  }};
+  background-color: ${({ theme, variant }) =>
+    variant === 'today' ? theme.colors.primary : theme.colors.background};
+  color: ${({ theme, variant }) =>
+    variant === 'today' ? theme.colors.text.white : 'inherit'};
 `;
