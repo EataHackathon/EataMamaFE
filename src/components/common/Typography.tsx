@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
 
-type TypographyVariant = 'title' | 'subtitle' | 'body1' | 'body2' | 'label';
+type TypographyVariant =
+  | 'title'
+  | 'subtitle'
+  | 'body1'
+  | 'body2'
+  | 'body3'
+  | 'label';
 type TypographyWeight = 'regular' | 'medium' | 'bold';
 type TypographyColor = 'default' | 'sub' | 'white' | 'primary';
 
