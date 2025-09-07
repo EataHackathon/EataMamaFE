@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.CALENDAR,
-    element: <AppLayout layoutType='left' />,
+    element: <AppLayout layoutType='navigation' />,
     children: [
       {
         index: true,
