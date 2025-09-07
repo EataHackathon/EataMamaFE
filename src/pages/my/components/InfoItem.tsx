@@ -25,5 +25,5 @@ const ItemWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => `${theme.spacing[6]} ${theme.spacing[4]}`};
 `;

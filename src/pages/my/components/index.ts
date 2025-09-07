@@ -1,3 +1,3 @@
 export { default as ProfileSection } from './ProfileSection';
 export { default as InfoSection } from './InfoSection';
-export { default as InfoItem } from './InfoItem';
+export { default as EditModal } from './EditModal';
