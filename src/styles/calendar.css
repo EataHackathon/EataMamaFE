@@ -1,0 +1,104 @@
+.fc {
+  flex: 1;
+  --fc-border-color: transparent;
+  --fc-button-bg-color: #e91e63;
+  --fc-button-border-color: #e91e63;
+  --fc-button-hover-bg-color: #e91e63;
+  --fc-button-hover-border-color: #e91e63;
+  --fc-button-active-bg-color: #e91e63;
+  --fc-button-active-border-color: #e91e63;
+  --fc-today-bg-color: #ffedf3;
+  --fc-event-bg-color: #e91e63;
+  --fc-event-border-color: #e91e63;
+  --fc-event-text-color: white;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: transparent;
+}
+
+.fc .fc-col-header-cell {
+  border-bottom: 1px solid #ffedf3;
+}
+
+.fc .fc-daygrid-day {
+  box-sizing: border-box;
+  background: transparent !important;
+}
+
+.fc .fc-daygrid-day-frame {
+  background: transparent !important;
+}
+
+.fc .fc-daygrid-day-number {
+  font-weight: 500;
+  color: #121212;
+}
+
+.fc .fc-daygrid-day:hover {
+  border-radius: 8px;
+}
+
+.fc .fc-day-today {
+  border-radius: 8px;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  color: #e91e63;
+  font-weight: bold;
+}
+
+.fc .fc-event {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.fc .fc-button {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+}
+
+.fc .fc-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #121212;
+}
+
+.fc .fc-col-header-cell:first-child {
+  color: #ef4444 !important;
+}
+
+.fc .fc-col-header-cell:nth-child(7) {
+  color: #3b82f6 !important;
+}
+
+.fc .fc-day-sun .fc-daygrid-day-number {
+  color: #ef4444 !important;
+}
+
+.fc .fc-day-sat .fc-daygrid-day-number {
+  color: #3b82f6 !important;
+}
+
+.fc .fc-daygrid-day .fc-daygrid-day-frame {
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+
+.fc .fc-daygrid-day.selected-date .fc-daygrid-day-frame {
+  border: 1px solid #3b82f6 !important;
+  border-radius: 8px !important;
+}
+
+.fc .fc-daygrid-day-top {
+  flex-direction: row;
+}

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import TheHeader, { type HeaderType } from './TheHeader';
 import TheNavigation from './TheNavigation';
 
-export type LayoutType = 'none' | HeaderType;
+export type LayoutType = 'none' | 'navigation' | HeaderType;
 
 type AppLayoutProps = {
   layoutType?: LayoutType;
@@ -13,7 +13,9 @@ const AppLayout = ({ layoutType = 'none' }: AppLayoutProps) => {
   return (
     <Background>
       <Container>
-        {layoutType !== 'none' && <TheHeader type={layoutType} />}
+        {layoutType !== 'none' && layoutType !== 'navigation' && (
+          <TheHeader type={layoutType} />
+        )}
         <Main>
           <Outlet />
         </Main>
@@ -42,5 +44,4 @@ const Container = styled.div`
 
 const Main = styled.main`
   flex: 1;
-  padding: ${({ theme }) => theme.spacing[4]};
 `;
