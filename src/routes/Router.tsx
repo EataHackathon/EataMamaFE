@@ -8,6 +8,7 @@ import {
   MainPage,
   MyPage,
   NotFoundPage,
+  SearchPage,
 } from '@/pages';
 
 const router = createBrowserRouter([
@@ -58,6 +59,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MyPage />,
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.SEARCH.ROOT,
+    element: <AppLayout layoutType='navigation' />,
+    children: [
+      {
+        index: true,
+        element: <SearchPage />,
       },
     ],
   },

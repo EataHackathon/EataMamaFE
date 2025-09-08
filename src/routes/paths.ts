@@ -4,4 +4,10 @@ export const ROUTE_PATH = {
   DIET: '/diet',
   CALENDAR: '/calendar',
   MY: '/my',
+
+  SEARCH: {
+    ROOT: '/search',
+    INGREDIENT: 'ingredient',
+    FOOD: 'food',
+  },
 } as const;
