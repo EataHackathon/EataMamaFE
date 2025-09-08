@@ -24,7 +24,11 @@ const TheHeader = ({ type }: TheHeaderProps) => {
 export default TheHeader;
 
 const Header = styled.header<{ type: HeaderType }>`
+  position: sticky;
+  top: 0;
+  z-index: 100;
   height: ${HEADER_HEIGHT}px;
   text-align: ${(props) => props.type};
   padding: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.background};
 `;
