@@ -2,7 +2,7 @@ import { RatingButton, Typography } from '@/components/common';
 import styled from '@emotion/styled';
 import IngredientInfo from './IngredientInfo';
 
-const IngredientData = [
+const ingredientData = [
   { name: '탄수화물', amount: '5.5g' },
   { name: '단백질', amount: '1g' },
   { name: '지방', amount: '0.2g' },
@@ -31,7 +31,7 @@ const ItemInfoSection = () => {
           26.6 kcal
         </Typography>
       </Box>
-      <IngredientInfo IngredientData={IngredientData} />
+      <IngredientInfo ingredientData={ingredientData} />
     </Section>
   );
 };

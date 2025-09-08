@@ -2,16 +2,16 @@ import { Typography } from '@/components/common';
 import styled from '@emotion/styled';
 
 type IngredientInfoProps = {
-  IngredientData: {
+  ingredientData: {
     name: string;
     amount: string;
   }[];
 };
 
-const IngredientInfo = ({ IngredientData }: IngredientInfoProps) => {
+const IngredientInfo = ({ ingredientData }: IngredientInfoProps) => {
   return (
     <Grid>
-      {IngredientData.map((ingredient) => (
+      {ingredientData.map((ingredient) => (
         <Box key={ingredient.name}>
           <Typography variant='body3' weight='medium' color='sub'>
             {ingredient.name}

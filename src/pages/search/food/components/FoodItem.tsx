@@ -27,7 +27,7 @@ const FoodItem = ({ title, number, summary, whyGood }: FoodItemProps) => {
           ✅ 이런 점이 좋아요:
         </Typography>
         {whyGood.map((benefit, index) => (
-          <Typography key={index} variant='body3'>
+          <Typography key={`${benefit}-${index}`} variant='body3'>
             {`${index + 1}. ${benefit}`}
           </Typography>
         ))}
