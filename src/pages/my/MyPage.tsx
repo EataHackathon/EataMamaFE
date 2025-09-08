@@ -1,9 +1,28 @@
+import { useTitleStore } from '@/stores';
+import { useEffect } from 'react';
+import { InfoSection, ProfileSection } from './components';
+import styled from '@emotion/styled';
+
 const MyPage = () => {
+  const { setTitle } = useTitleStore();
+
+  useEffect(() => {
+    setTitle('내 프로필');
+  }, [setTitle]);
+
   return (
-    <div>
-      <h1>My Page</h1>
-    </div>
+    <Container>
+      <ProfileSection />
+      <InfoSection />
+    </Container>
   );
 };
 
 export default MyPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[6]};
+`;

@@ -47,6 +47,10 @@ const TheNavigation = () => {
 export default TheNavigation;
 
 const Navigation = styled.nav`
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  background-color: ${({ theme }) => theme.colors.background};
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: ${NAV_HEIGHT}px;

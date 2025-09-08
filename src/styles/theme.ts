@@ -20,6 +20,12 @@ export const theme = {
     secondary: '#FFEDF3',
     disabled: '#E7E7E7',
     background: '#F8F8F8',
+    // 상태 색상
+    status: {
+      GOOD: '#DAFFDC',
+      OK: '#FFFCDA',
+      CAUTION: '#FFDADB',
+    },
     // 텍스트 색상
     text: {
       primary: '#e91e63',
@@ -27,6 +33,9 @@ export const theme = {
       default: gray[100], // 기본 텍스트
       sub: gray[50], // 보조 텍스트
       white: gray[0], // 흰색 텍스트
+      GOOD: '#1AA320',
+      OK: '#F98F2C',
+      CAUTION: '#FF6666',
     },
   },
 
@@ -40,16 +49,20 @@ export const theme = {
 
     // 부제목
     subtitle: {
-      fontSize: '1.125rem', // 18px
-      lineHeight: '1.5rem', // 24px
+      fontSize: '1.25rem', // 20px
+      lineHeight: '1.6875rem', // 27px
     },
 
     // 본문
     body1: {
+      fontSize: '1.125rem', // 18px
+      lineHeight: '1.5rem', // 24px
+    },
+    body2: {
       fontSize: '1rem', // 16px
       lineHeight: '1.375rem', // 22px
     },
-    body2: {
+    body3: {
       fontSize: '0.875rem', // 14px
       lineHeight: '1.1875rem', // 19px
     },
@@ -57,7 +70,7 @@ export const theme = {
     // 레이블
     label: {
       fontSize: '0.625rem', // 10px
-      lineHeight: '0.9375rem', // 15px
+      lineHeight: '0.875rem', // 14px
     },
 
     fontWeight: {

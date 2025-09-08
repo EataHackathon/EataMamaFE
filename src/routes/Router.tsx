@@ -4,9 +4,13 @@ import { AppLayout } from '@/components';
 import {
   CalendarPage,
   DietPage,
+  FoodPage,
+  IngredientPage,
+  LoginPage,
   MainPage,
   MyPage,
   NotFoundPage,
+  SearchPage,
 } from '@/pages';
 
 const router = createBrowserRouter([
@@ -21,8 +25,18 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: ROUTE_PATH.LOGIN,
+    element: <AppLayout layoutType='none' />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
+      },
+    ],
+  },
+  {
     path: ROUTE_PATH.CALENDAR,
-    element: <AppLayout layoutType='left' />,
+    element: <AppLayout layoutType='navigation' />,
     children: [
       {
         index: true,
@@ -47,6 +61,25 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MyPage />,
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.SEARCH.ROOT,
+    element: <AppLayout layoutType='navigation' />,
+    children: [
+      {
+        element: <SearchPage />,
+        children: [
+          {
+            path: ROUTE_PATH.SEARCH.INGREDIENT,
+            element: <IngredientPage />,
+          },
+          {
+            path: ROUTE_PATH.SEARCH.FOOD,
+            element: <FoodPage />,
+          },
+        ],
       },
     ],
   },
