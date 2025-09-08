@@ -4,6 +4,8 @@ import { AppLayout } from '@/components';
 import {
   CalendarPage,
   DietPage,
+  FoodPage,
+  IngredientPage,
   LoginPage,
   MainPage,
   MyPage,
@@ -67,8 +69,17 @@ const router = createBrowserRouter([
     element: <AppLayout layoutType='navigation' />,
     children: [
       {
-        index: true,
         element: <SearchPage />,
+        children: [
+          {
+            path: ROUTE_PATH.SEARCH.INGREDIENT,
+            element: <IngredientPage />,
+          },
+          {
+            path: ROUTE_PATH.SEARCH.FOOD,
+            element: <FoodPage />,
+          },
+        ],
       },
     ],
   },
