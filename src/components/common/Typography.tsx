@@ -8,7 +8,14 @@ type TypographyVariant =
   | 'body3'
   | 'label';
 type TypographyWeight = 'regular' | 'medium' | 'bold';
-type TypographyColor = 'default' | 'sub' | 'white' | 'primary';
+type TypographyColor =
+  | 'default'
+  | 'sub'
+  | 'white'
+  | 'primary'
+  | 'GOOD'
+  | 'OK'
+  | 'CAUTION';
 
 type TypographyProps = {
   variant: TypographyVariant;
