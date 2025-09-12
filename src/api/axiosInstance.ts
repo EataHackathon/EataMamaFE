@@ -1,16 +1,25 @@
+import { useLoginStore } from '@/stores/login';
 import axios from 'axios';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
-
-const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000,
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 5000,
 });
 
-// 인터셉터 추가 가능
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = useLoginStore.getState().token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
-export default apiClient;
+export default axiosInstance;
