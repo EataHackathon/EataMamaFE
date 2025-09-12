@@ -9,14 +9,39 @@ import lunch from '@/assets/lunch.png';
 import dinner from '@/assets/dinner.png';
 
 import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const DietPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const urlParams = new URLSearchParams(location.search);
+  const type = urlParams.get('type') || 'INGRIDIENT';
+
+  const typeButtonClick = (buttonType: string) => {
+    urlParams.set('type', buttonType);
+    navigate(`${location.pathname}?${urlParams.toString()}`, { replace: true });
+  };
+
   return (
     <>
       <Search>
         <ButtonContainer>
-          <Button variant='primary'>음식 검색</Button>
-          <Button variant='disabled'>재료 검색</Button>
+          <Button
+            variant={type === 'INGRIDIENT' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('INGRIDIENT');
+            }}
+          >
+            음식 검색
+          </Button>
+          <Button
+            variant={type === 'FOOD' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('FOOD');
+            }}
+          >
+            재료 검색
+          </Button>
         </ButtonContainer>
         <SearchBar />
       </Search>

@@ -1,11 +1,30 @@
 import styled from '@emotion/styled';
 import { Search } from 'lucide-react';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const [searchTerm, setSearchTerm] = useState(
+    () => urlParams.get('query') || '',
+  );
+
+  const searchClick = () => {
+    urlParams.set('query', searchTerm);
+    navigate(`/search-result?${urlParams.toString()}`);
+  };
+
   return (
     <SearchContainer>
-      <SearchInput type='text' placeholder='음식 이름을 검색하세요' />
-      <SearchIcon>
+      <SearchInput
+        type='text'
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder='음식 이름을 검색하세요'
+      />
+      <SearchIcon onClick={searchClick}>
         <Search size={40} color='#e91e63' />
       </SearchIcon>
     </SearchContainer>
