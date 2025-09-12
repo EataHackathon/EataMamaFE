@@ -29,6 +29,7 @@ export const theme = {
     // 텍스트 색상
     text: {
       primary: '#e91e63',
+      secondary: '#FFEDF3',
       disabled: '#A0A0A0',
       default: gray[100], // 기본 텍스트
       sub: gray[50], // 보조 텍스트
