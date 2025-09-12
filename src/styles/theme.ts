@@ -19,6 +19,7 @@ export const theme = {
     primary: '#e91e63',
     secondary: '#FFEDF3',
     disabled: '#E7E7E7',
+    disabled2: '#CFCFCF',
     background: '#F8F8F8',
     // 상태 색상
     status: {

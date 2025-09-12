@@ -10,7 +10,30 @@ import dinner from '@/assets/dinner.png';
 
 import styled from '@emotion/styled';
 
+const currentIntake = [
+  { id: 1, label: '탄수화물', key: 'carbohydrate', value: 92, unit: 'g' },
+  { id: 2, label: '단백질', key: 'protein', value: 70, unit: 'g' },
+  { id: 3, label: '지방', key: 'fat', value: 42, unit: 'g' },
+  { id: 4, label: '식이섬유', key: 'dietaryFiber', value: 9, unit: 'g' },
+];
+
+// 100% 기준이 되는 일일 권장 섭취량
+const intake: { [key: string]: number } = {
+  carbohydrate: 350,
+  protein: 70,
+  fat: 70,
+  dietaryFiber: 25,
+};
+
 const DietPage = () => {
+  // 1. 퍼센트 계산 로직을 페이지 레벨에서 수행
+  const nutrientDataForChart = currentIntake.map((data) => {
+    const recommendedValue = intake[data.key];
+    const percentage =
+      recommendedValue > 0 ? (data.value / recommendedValue) * 100 : 0;
+    return { ...data, percentage: Math.min(percentage, 200) };
+  });
+
   return (
     <>
       <Search>
@@ -46,7 +69,10 @@ const DietPage = () => {
       </Meal>
 
       <Analysis>
-        <NutrientAnalysis />
+        <NutrientAnalysis
+          totalCalories={1239}
+          nutrientData={nutrientDataForChart}
+        />
       </Analysis>
 
       <TodaySummary>

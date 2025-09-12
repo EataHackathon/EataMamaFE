@@ -26,10 +26,12 @@ const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   padding: ${({ theme }) => theme.spacing[5]} 0;
 `;
-const Title = styled.h2``;
+const Title = styled.h2`
+  font-size: ${({ theme }) => theme.typography.subtitle.fontSize};
+`;
 const Content = styled.div`
   background-color: ${({ theme }) => theme.colors.gray[10]};
   padding: ${({ theme }) => theme.spacing[5]};
