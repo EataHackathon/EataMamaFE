@@ -3,23 +3,27 @@ import styled from '@emotion/styled';
 import TheHeader, { type HeaderType } from './TheHeader';
 import TheNavigation from './TheNavigation';
 
-export type LayoutType = 'none' | 'navigation' | HeaderType;
+export type HeaderLayoutType = 'none' | HeaderType;
+
+export type NavigationLayoutType = 'none' | 'navigation';
 
 type AppLayoutProps = {
-  layoutType?: LayoutType;
+  headerLayoutType?: HeaderLayoutType;
+  navigationLayoutType?: NavigationLayoutType;
 };
 
-const AppLayout = ({ layoutType = 'none' }: AppLayoutProps) => {
+const AppLayout = ({
+  headerLayoutType = 'none',
+  navigationLayoutType = 'none',
+}: AppLayoutProps) => {
   return (
     <Background>
       <Container>
-        {layoutType !== 'none' && layoutType !== 'navigation' && (
-          <TheHeader type={layoutType} />
-        )}
+        {headerLayoutType !== 'none' && <TheHeader type={headerLayoutType} />}
         <Main>
           <Outlet />
         </Main>
-        {layoutType !== 'none' && <TheNavigation />}
+        {navigationLayoutType !== 'none' && <TheNavigation />}
       </Container>
     </Background>
   );

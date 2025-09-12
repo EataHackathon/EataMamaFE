@@ -1,13 +1,10 @@
 import { useTitleStore } from '@/stores';
 import { useEffect, useState } from 'react';
-import {
-  ImageSection,
-  MealInfoSection,
-  MealPlusSection,
-  TimeSection,
-} from './components';
+import NutrientAnalysis from '@/components/layout/NutrientAnalysis';
+import { ImageSection, MealPlusSection, TimeSection } from './components';
 import styled from '@emotion/styled';
 import { getTime } from '@/utils';
+import Button2 from '@/components/common/Button2';
 
 const MealLogPage = () => {
   const { setTitle } = useTitleStore();
@@ -25,8 +22,15 @@ const MealLogPage = () => {
     setTitle('Meal Log');
   }, [setTitle]);
 
+  const emptyData = [
+    { id: 1, label: '탄수화물', value: 0, unit: 'g', percentage: 0 },
+    { id: 2, label: '단백질', value: 0, unit: 'g', percentage: 0 },
+    { id: 3, label: '지방', value: 0, unit: 'g', percentage: 0 },
+    { id: 4, label: '식이섬유', value: 0, unit: 'g', percentage: 0 },
+  ];
+
   return (
-    <Form>
+    <Form onSubmit={() => {}}>
       <ImageSection
         mealName={formValues.mealName}
         setMealName={(name) =>
@@ -45,8 +49,14 @@ const MealLogPage = () => {
           setFormValues((prev) => ({ ...prev, intakes }))
         }
       />
-      <MealInfoSection />
-      <button type='submit'></button>
+
+      <NutrientSection>
+        <NutrientAnalysis totalCalories={0} nutrientData={emptyData} />
+      </NutrientSection>
+
+      <ButtonSection>
+        <Button2 variant='disabled'>저장하기</Button2>
+      </ButtonSection>
     </Form>
   );
 };
@@ -54,3 +64,15 @@ const MealLogPage = () => {
 export default MealLogPage;
 
 const Form = styled.form``;
+
+const ButtonSection = styled.footer`
+  position: sticky;
+  background-color: ${({ theme }) => theme.colors.background};
+  bottom: 0;
+  padding: ${({ theme }) => `${theme.spacing[8]}`};
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+`;
+
+const NutrientSection = styled.div`
+  margin-bottom: ${({ theme }) => `${theme.spacing[15]}`};
+`;
