@@ -1,19 +1,25 @@
 import { Typography } from '@/components/common';
 import styled from '@emotion/styled';
 
-const ProfileSection = () => {
+type ProfileSectionProps = {
+  nickname: string;
+  email: string;
+  ImageURL: string;
+};
+
+const ProfileSection = ({ nickname, email, ImageURL }: ProfileSectionProps) => {
   return (
     <Section>
       <TypoWrapper>
         <Typography variant='subtitle' weight='bold'>
-          땅콩이살뺄거야
+          {nickname}
         </Typography>
         <Typography variant='body2' weight='medium' color='sub'>
-          hanhui1823@gmail.com
+          {email}
         </Typography>
       </TypoWrapper>
       <IconWrapper>
-        <IconDiv />
+        <Img src={ImageURL} alt={nickname} />
       </IconWrapper>
     </Section>
   );
@@ -40,9 +46,8 @@ const IconWrapper = styled.div`
   justify-content: center;
 `;
 
-const IconDiv = styled.div`
+const Img = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50px;
-  background-color: ${({ theme }) => theme.colors.primary};
 `;
