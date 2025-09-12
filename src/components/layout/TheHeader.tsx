@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useTitleStore } from '@/stores';
 import Typography from '../common/Typography';
 import { HEADER_HEIGHT } from '@/constants';
 
@@ -10,12 +9,16 @@ type TheHeaderProps = {
 };
 
 const TheHeader = ({ type }: TheHeaderProps) => {
-  const { title } = useTitleStore();
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getDate()).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}년 ${month}월 ${day}일`;
 
   return (
     <Header type={type}>
       <Typography variant='title' weight='bold' as='h1'>
-        {title}
+        {formattedDate}
       </Typography>
     </Header>
   );
