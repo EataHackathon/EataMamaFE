@@ -66,6 +66,8 @@ export default MealLogPage;
 const Form = styled.form``;
 
 const ButtonSection = styled.footer`
+  position: sticky;
+  background-color: ${({ theme }) => theme.colors.background};
   bottom: 0;
   padding: ${({ theme }) => `${theme.spacing[8]}`};
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);

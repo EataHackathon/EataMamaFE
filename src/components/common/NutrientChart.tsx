@@ -25,7 +25,7 @@ export const NutrientChart = ({
           value={percentage}
           styles={buildStyles({
             pathColor: theme.colors.primary, // 프로그레스 바 색상
-            trailColor: '#FFEDF3', // 배경 트랙 색상
+            trailColor: theme.colors.secondary, // 배경 트랙 색상
           })}
         />
         <ValueText>{`${value}${unit}`}</ValueText>

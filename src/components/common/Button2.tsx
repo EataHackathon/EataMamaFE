@@ -42,7 +42,7 @@ const StyledButton = styled.button<StyledProps>(({ theme, variant }) => ({
   color: theme.colors.text.white,
 
   // --- 상태별 스타일 ---
-  '&:hover': {
+  '&:hover:not(:disabled)': {
     filter: 'brightness(0.95)',
   },
 

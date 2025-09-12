@@ -26,7 +26,7 @@ const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[5]} 0;
 `;
 const Title = styled.h2`
