@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import EditModal from './EditModal';
 import { useModal } from '@/contexts';
+import type { Allergy, Condition } from '../hooks';
 
 export const formFields = [
   { id: 'height', label: '키', unit: 'cm' },
@@ -15,15 +16,37 @@ export const formFields = [
 
 export type FormField = (typeof formFields)[number];
 
-const InfoSection = () => {
+type InfoSectionProps = {
+  nickname: string;
+  height: number;
+  weight: number;
+  week: number;
+  conditions: Condition[];
+  allergies: Allergy[];
+};
+
+const InfoSection = ({
+  nickname,
+  height,
+  weight,
+  week,
+  conditions,
+  allergies,
+}: InfoSectionProps) => {
   const { openModal } = useModal();
   const [formValues, setFormValues] = useState<Record<FormField['id'], string>>(
     {
-      height: '170',
-      weight: '60',
-      pregnancyWeeks: '12',
-      allergies: '땅콩',
-      specialNotes: '없음',
+      height: String(height || ''),
+      weight: String(weight || ''),
+      pregnancyWeeks: String(week || ''),
+      allergies:
+        (allergies?.length ?? 0) > 0
+          ? allergies.map((a) => a.allergyName).join(', ')
+          : '없음',
+      specialNotes:
+        (conditions?.length ?? 0) > 0
+          ? conditions.map((c) => c.diseaseName).join(', ')
+          : '없음',
     },
   );
 
@@ -43,7 +66,11 @@ const InfoSection = () => {
         <InfoItem key={id} label={label} value={formValues[id] + unit} />
       ))}
 
-      <EditModal infoData={formValues} setInfoData={setFormValues} />
+      <EditModal
+        nickname={nickname}
+        infoData={formValues}
+        setInfoData={setFormValues}
+      />
     </Section>
   );
 };

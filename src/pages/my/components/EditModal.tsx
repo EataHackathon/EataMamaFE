@@ -4,21 +4,42 @@ import styled from '@emotion/styled';
 import { X } from 'lucide-react';
 import { formFields, type FormField } from './InfoSection';
 import { useState } from 'react';
+import { usePostUser } from '../hooks';
 
 type EditModalProps = {
+  nickname: string;
   infoData: Record<FormField['id'], string>;
   setInfoData: React.Dispatch<
     React.SetStateAction<Record<FormField['id'], string>>
   >;
 };
 
-const EditModal = ({ infoData, setInfoData }: EditModalProps) => {
+const EditModal = ({ nickname, infoData, setInfoData }: EditModalProps) => {
   const { isOpen, closeModal } = useModal();
   const [editData, setEditData] = useState(infoData);
+  const { createUser } = usePostUser();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setInfoData(editData);
+    createUser({
+      nickname,
+      height: Number(editData.height) || 0,
+      weight: Number(editData.weight) || 0,
+      week: Number(editData.pregnancyWeeks) || 0,
+      conditions:
+        editData.specialNotes && editData.specialNotes !== '없음'
+          ? editData.specialNotes
+              .split(',')
+              .map((c) => ({ diseaseName: c.trim() }))
+          : [],
+      allergies:
+        editData.allergies && editData.allergies !== '없음'
+          ? editData.allergies
+              .split(',')
+              .map((a) => ({ allergyName: a.trim() }))
+          : [],
+    });
     closeModal();
   };
 
