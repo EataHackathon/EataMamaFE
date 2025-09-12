@@ -3,6 +3,7 @@ import { ROUTE_PATH } from './paths';
 import { AppLayout } from '@/components';
 import {
   CalendarPage,
+  CallbackPage,
   DietPage,
   FoodPage,
   IngredientPage,
@@ -91,6 +92,16 @@ const router = createBrowserRouter([
             element: <FoodPage />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.CALLBACK,
+    element: <AppLayout layoutType='none' />,
+    children: [
+      {
+        index: true,
+        element: <CallbackPage />,
       },
     ],
   },

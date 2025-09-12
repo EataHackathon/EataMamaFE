@@ -1,11 +1,14 @@
 import { KakaoLogin, Logo } from '@/assets';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   return (
     <Container>
       <Img src={Logo} alt='Logo' />
-      <img src={KakaoLogin} alt='Kakao Login' />
+      <Link to={import.meta.env.VITE_APP_KAKAO_AUTH_REDIRECT_URI}>
+        <img src={KakaoLogin} alt='Kakao Login' />
+      </Link>
     </Container>
   );
 };
