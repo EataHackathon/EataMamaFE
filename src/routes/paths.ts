@@ -5,6 +5,8 @@ export const ROUTE_PATH = {
   CALENDAR: '/calendar',
   MY: '/my',
 
+  MEAL_LOG: '/meal-log',
+
   SEARCH: {
     ROOT: '/search',
     INGREDIENT: 'ingredient',

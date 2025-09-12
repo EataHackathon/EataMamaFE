@@ -8,6 +8,7 @@ import {
   IngredientPage,
   LoginPage,
   MainPage,
+  MealLogPage,
   MyPage,
   NotFoundPage,
   SearchPage,
@@ -51,6 +52,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DietPage />,
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.MEAL_LOG,
+    element: <AppLayout layoutType='center' />,
+    children: [
+      {
+        index: true,
+        element: <MealLogPage />,
       },
     ],
   },
