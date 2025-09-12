@@ -12,6 +12,7 @@ export const ROUTE_PATH = {
     INGREDIENT: 'ingredient',
     FOOD: 'food',
   },
+  RESULT: '/search-result',
 
   CALLBACK: '/oauth/callback',
 } as const;
