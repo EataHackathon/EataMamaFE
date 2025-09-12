@@ -12,4 +12,6 @@ export const ROUTE_PATH = {
     INGREDIENT: 'ingredient',
     FOOD: 'food',
   },
+
+  CALLBACK: '/oauth/callback',
 } as const;
