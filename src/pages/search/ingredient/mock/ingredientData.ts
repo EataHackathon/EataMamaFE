@@ -1,4 +1,4 @@
-export const foodData = [
+export const ingredientData = [
   {
     title: '토마토 달걀 볶음 (토달볶) 🍳',
     summary:
