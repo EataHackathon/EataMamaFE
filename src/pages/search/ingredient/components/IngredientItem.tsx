@@ -6,7 +6,7 @@ type IngredientItemProps = {
   ingredient: {
     name: string;
     rating: 'GOOD' | 'OK' | 'CAUTION';
-    content: string;
+    reason: string;
   };
 };
 
@@ -21,7 +21,7 @@ const IngredientItem = ({ number, ingredient }: IngredientItemProps) => {
         >{`${number}. ${ingredient.name}`}</Typography>
         <RatingButton variant={ingredient.rating} />
       </Box>
-      <Typography variant='body3'>{ingredient.content}</Typography>
+      <Typography variant='body3'>{ingredient.reason}</Typography>
     </Container>
   );
 };
