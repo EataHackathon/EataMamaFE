@@ -8,7 +8,7 @@ type PostAIIngredientParams = {
 export const postAIIngredient = async ({ data }: PostAIIngredientParams) => {
   try {
     const response = await axiosInstance.post(API_PATHS.AI_INGREDIENT, {
-      params: data,
+      data: data,
     });
     return response.data;
   } catch (error) {
