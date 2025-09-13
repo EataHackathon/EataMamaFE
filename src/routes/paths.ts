@@ -15,5 +15,6 @@ export const ROUTE_PATH = {
   },
   RESULT: '/search-result',
 
-  CALLBACK: '/oauth/callback',
+  CALLBACK: '/callback',
+  CALLBACK_OAUTH: '/oauth/callback',
 } as const;
