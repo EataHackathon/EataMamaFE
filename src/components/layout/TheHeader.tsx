@@ -10,7 +10,7 @@ type TheHeaderProps = {
 };
 
 const TheHeader = ({ type }: TheHeaderProps) => {
-  const { title } = useTitleStore();
+const { title } = useTitleStore();
 
   return (
     <Header type={type}>
