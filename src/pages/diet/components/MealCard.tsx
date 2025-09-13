@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import { Plus } from 'lucide-react';
+import type { Intake } from '../hooks';
 
 type MealCardProps = {
   title: string;
   imageUrl: string;
-  description: string;
-  tags: string;
-  calories: number;
+  description: string | null;
+  tags: string | null;
+  calories: Intake[] | null;
 };
 
 const MealCard = ({
@@ -26,11 +27,16 @@ const MealCard = ({
             <Plus color='white' size={22} />
           </PlusButton>
         </TitleContainer>
-        <Description>{description}</Description>
-        <TagContainer>
-          <Tag>{tags}</Tag>
-          <Calories>{calories} kcal</Calories>
-        </TagContainer>
+        {description && <Description>{description}</Description>}
+        {tags && calories && (
+          <TagContainer>
+            <Tag>{tags}</Tag>
+            <Calories>
+              {calories.reduce((sum, intake) => sum + intake.intakeKcal, 0)}{' '}
+              kcal
+            </Calories>
+          </TagContainer>
+        )}
       </ContentContainer>
     </CardContainer>
   );

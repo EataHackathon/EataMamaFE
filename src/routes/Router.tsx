@@ -73,7 +73,9 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.MY,
-    element: <AppLayout headerLayoutType='center' />,
+    element: (
+      <AppLayout headerLayoutType='center' navigationLayoutType='navigation' />
+    ),
     children: [
       {
         index: true,
