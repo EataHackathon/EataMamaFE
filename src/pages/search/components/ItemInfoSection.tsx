@@ -2,25 +2,36 @@ import { RatingButton, Typography } from '@/components/common';
 import styled from '@emotion/styled';
 import IngredientInfo from './IngredientInfo';
 
-const ingredientData = [
-  { name: '탄수화물', amount: '5.5g' },
-  { name: '단백질', amount: '1g' },
-  { name: '지방', amount: '0.2g' },
-  { name: '식이섬유', amount: '0.8g' },
-];
+type ItemInfoSectionProps = {
+  name: string;
+  gram: number;
+  kcal: number;
+  carbo: number;
+  protein: number;
+  fat: number;
+  dietaryFiber: number;
+};
 
-const ItemInfoSection = () => {
+const ItemInfoSection = ({
+  name,
+  gram,
+  kcal,
+  carbo,
+  protein,
+  fat,
+  dietaryFiber,
+}: ItemInfoSectionProps) => {
   return (
     <Section>
       <Box>
         <Title>
           <Typography variant='subtitle' weight='bold' as='h2'>
-            삼계탕
+            {name}
           </Typography>
           <RatingButton variant='GOOD' />
         </Title>
         <Typography variant='body3' color='sub' weight='medium'>
-          150g
+          {gram}g
         </Typography>
       </Box>
       <Box>
@@ -28,10 +39,15 @@ const ItemInfoSection = () => {
           영양분석
         </Typography>
         <Typography variant='body1' color='primary' weight='bold'>
-          26.6 kcal
+          {kcal} kcal
         </Typography>
       </Box>
-      <IngredientInfo ingredientData={ingredientData} />
+      <IngredientInfo
+        carbo={carbo}
+        protein={protein}
+        fat={fat}
+        dietaryFiber={dietaryFiber}
+      />
     </Section>
   );
 };

@@ -1,42 +1,32 @@
-import { Typography } from '@/components/common';
+import { RatingButton, Typography } from '@/components/common';
 import styled from '@emotion/styled';
 
-type FoodItemProps = {
-  title: string;
+type IngredientItemProps = {
   number: number;
-  summary: string;
-  whyGood: string[];
+  ingredient: {
+    name: string;
+    rating: 'GOOD' | 'OK' | 'CAUTION';
+    reason: string;
+  };
 };
 
-const FoodItem = ({ title, number, summary, whyGood }: FoodItemProps) => {
+const IngredientItem = ({ number, ingredient }: IngredientItemProps) => {
   return (
     <Container>
       <Box>
-        <Circle>
-          <Typography variant='body2' weight='bold' color='white'>
-            {number}
-          </Typography>
-        </Circle>
-        <Typography variant='body1' weight='bold'>
-          {title}
-        </Typography>
+        <Typography
+          variant='subtitle'
+          weight='bold'
+          as='h3'
+        >{`${number}. ${ingredient.name}`}</Typography>
+        <RatingButton variant={ingredient.rating} />
       </Box>
-      <Typography variant='body3'>{summary}</Typography>
-      <FoodBenefit>
-        <Typography variant='body3' weight='bold'>
-          ✅ 이런 점이 좋아요:
-        </Typography>
-        {whyGood.map((benefit, index) => (
-          <Typography key={`${benefit}-${index}`} variant='body3'>
-            {`${index + 1}. ${benefit}`}
-          </Typography>
-        ))}
-      </FoodBenefit>
+      <Typography variant='body3'>{ingredient.reason}</Typography>
     </Container>
   );
 };
 
-export default FoodItem;
+export default IngredientItem;
 
 const Container = styled.div`
   display: flex;
@@ -49,21 +39,4 @@ const Box = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing[2]};
   align-items: center;
-  margin-bottom: ${({ theme }) => theme.spacing[1]};
-`;
-
-const Circle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50px;
-  background-color: ${({ theme }) => theme.colors.primary};
-`;
-
-const FoodBenefit = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[1]};
 `;
