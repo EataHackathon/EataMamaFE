@@ -13,6 +13,7 @@ import {
   MyPage,
   NotFoundPage,
   SearchPage,
+  FoodInfoPage,
 } from '@/pages';
 
 const router = createBrowserRouter([
@@ -101,7 +102,6 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.CALLBACK,
-    element: <AppLayout layoutType='none' />,
     children: [
       {
         index: true,
@@ -112,6 +112,16 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <NotFoundPage />,
+  },
+  {
+    path: ROUTE_PATH.FOOD_INFO,
+    element: <AppLayout headerLayoutType='center' />,
+    children: [
+      {
+        index: true,
+        element: <FoodInfoPage />,
+      },
+    ],
   },
 ]);
 
