@@ -101,6 +101,7 @@ const DietPage = () => {
         <Meal>
           <MealCard
             title='아침'
+            type='BREAKFAST'
             imageUrl={breakfast}
             description={null}
             tags={null}
@@ -108,6 +109,7 @@ const DietPage = () => {
           />
           <MealCard
             title='점심'
+            type='LUNCH'
             imageUrl={lunch}
             description={null}
             tags={null}
@@ -115,6 +117,7 @@ const DietPage = () => {
           />
           <MealCard
             title='저녁'
+            type='DINNER'
             imageUrl={dinner}
             description={null}
             tags={null}
@@ -170,6 +173,7 @@ const DietPage = () => {
       <Meal>
         <MealCard
           title='아침'
+          type='BREAKFAST'
           imageUrl={breakfast}
           description={breakfastMeal?.mealAdvice || null}
           tags={breakfastMeal?.mealName || null}
@@ -177,6 +181,7 @@ const DietPage = () => {
         />
         <MealCard
           title='점심'
+          type='LUNCH'
           imageUrl={lunch}
           description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
           tags='도시락'
@@ -184,6 +189,7 @@ const DietPage = () => {
         />
         <MealCard
           title='저녁'
+          type='DINNER'
           imageUrl={dinner}
           description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
           tags='로제마라샹궈'

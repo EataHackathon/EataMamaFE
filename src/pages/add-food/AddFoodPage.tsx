@@ -28,7 +28,6 @@ const AddFoodPage = () => {
 
   const handleConfirm = () => {
     if (selectedFoods.length === 0) return; // 선택된 아이템 없으면 동작 안 함
-    console.log('최종 추가된 음식:', selectedFoods);
     navigate(-1);
   };
 

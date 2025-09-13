@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 type MealCardProps = {
   title: string;
+  type: string;
   imageUrl: string;
   description: string | null;
   tags: string | null;
@@ -12,14 +13,15 @@ type MealCardProps = {
 };
 
 const MealCard = ({
+  type,
   tags,
   calories,
   description,
   title,
   imageUrl,
 }: MealCardProps) => {
-  const gotoMealLog = (title: string) =>
-    `/meal-log?title=${encodeURIComponent(title)}`;
+  const gotoMealLog = (type: string) =>
+    `/meal-log?title=${encodeURIComponent(type)}`;
 
   return (
     <CardContainer>
@@ -27,7 +29,7 @@ const MealCard = ({
       <ContentContainer>
         <TitleContainer>
           <Title>{title}</Title>
-          <PlusButton to={gotoMealLog(title)}>
+          <PlusButton to={gotoMealLog(type)}>
             <Plus color='white' size={22} />
           </PlusButton>
         </TitleContainer>

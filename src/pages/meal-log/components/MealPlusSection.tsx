@@ -3,13 +3,7 @@ import { ROUTE_PATH } from '@/routes/paths';
 import styled from '@emotion/styled';
 import { Link, useLocation } from 'react-router-dom';
 
-type MealPlusSectionProps = {
-  intakes: string[];
-  setIntakes: (intakes: string[]) => void;
-};
-
-const MealPlusSection = ({ intakes, setIntakes }: MealPlusSectionProps) => {
-  console.log(intakes, setIntakes);
+const MealPlusSection = () => {
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
 
