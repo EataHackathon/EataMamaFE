@@ -29,6 +29,13 @@ const intake: { [key: string]: number } = {
   dietaryFiber: 25,
 };
 
+const nutrientDataForChart = currentIntake.map((data) => {
+  const recommendedValue = intake[data.key];
+  const percentage =
+    recommendedValue > 0 ? (data.value / recommendedValue) * 100 : 0;
+  return { ...data, percentage: Math.min(percentage, 200) };
+});
+
 const DietPage = () => {
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
@@ -139,12 +146,6 @@ const DietPage = () => {
   );
 
   // 1. 퍼센트 계산 로직을 페이지 레벨에서 수행
-  const nutrientDataForChart = currentIntake.map((data) => {
-    const recommendedValue = intake[data.key];
-    const percentage =
-      recommendedValue > 0 ? (data.value / recommendedValue) * 100 : 0;
-    return { ...data, percentage: Math.min(percentage, 200) };
-  });
 
   return (
     <>

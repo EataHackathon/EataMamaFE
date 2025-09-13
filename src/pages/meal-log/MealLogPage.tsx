@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useFoodStore } from '@/stores/foodStore';
 import type { Food } from '@/api/getSearchMeal';
 import { ROUTE_PATH } from '@/routes/paths';
+import { Typography } from '@/components/common';
 
 const dataToIntake = (data: Food[]): Intake[] => {
   return data.map((item) => ({
@@ -63,12 +64,40 @@ const MealLogPage = () => {
     navigate(ROUTE_PATH.DIET);
   };
 
-  const emptyData = [
-    { id: 1, label: '탄수화물', value: 0, unit: 'g', percentage: 0 },
-    { id: 2, label: '단백질', value: 0, unit: 'g', percentage: 0 },
-    { id: 3, label: '지방', value: 0, unit: 'g', percentage: 0 },
-    { id: 4, label: '식이섬유', value: 0, unit: 'g', percentage: 0 },
+  const carbo = formValues.intakes.reduce(
+    (sum, intake) => sum + intake.carbo,
+    0,
+  );
+  const protein = formValues.intakes.reduce(
+    (sum, intake) => sum + intake.protein,
+    0,
+  );
+  const fat = formValues.intakes.reduce((sum, intake) => sum + intake.fat, 0);
+  const dietaryFiber = formValues.intakes.reduce(
+    (sum, intake) => sum + intake.dietaryFiber,
+    0,
+  );
+
+  const nutrientData = [
+    { id: 1, label: '탄수화물', value: carbo, unit: 'g', percentage: 0 },
+    { id: 2, label: '단백질', value: protein, unit: 'g', percentage: 0 },
+    { id: 3, label: '지방', value: fat, unit: 'g', percentage: 0 },
+    { id: 4, label: '식이섬유', value: dietaryFiber, unit: 'g', percentage: 0 },
   ];
+
+  const intake: { [key: string]: number } = {
+    carbohydrate: 350,
+    protein: 70,
+    fat: 70,
+    dietaryFiber: 25,
+  };
+
+  const nutrientDataForChart = nutrientData.map((data) => {
+    const recommendedValue = intake[data.id];
+    const percentage =
+      recommendedValue > 0 ? (data.value / recommendedValue) * 100 : 0;
+    return { ...data, percentage: Math.min(percentage, 200) };
+  });
 
   return (
     <Form onSubmit={submitMeal}>
@@ -87,8 +116,25 @@ const MealLogPage = () => {
       <MealPlusSection />
 
       <NutrientSection>
-        <NutrientAnalysis totalCalories={0} nutrientData={emptyData} />
+        <NutrientAnalysis
+          totalCalories={formValues.intakes.reduce(
+            (sum, intake) => sum + intake.intakeKcal,
+            0,
+          )}
+          nutrientData={nutrientDataForChart}
+        />
       </NutrientSection>
+
+      <Box>
+        {formValues.intakes.map((item, index) => (
+          <Item key={`${item.intakeName}-${index}`}>
+            <Typography variant='body1' weight='bold'>
+              {item.intakeName}
+            </Typography>
+            <Typography variant='body2'>{item.intakeKcal} kcal</Typography>
+          </Item>
+        ))}
+      </Box>
 
       <ButtonSection>
         <Button2>저장하기</Button2>
@@ -111,4 +157,18 @@ const ButtonSection = styled.footer`
 
 const NutrientSection = styled.div`
   margin-bottom: ${({ theme }) => `${theme.spacing[15]}`};
+`;
+
+const Box = styled.div`
+  margin: 0 ${({ theme }) => `${theme.spacing[9]}`};
+  padding: ${({ theme }) => `${theme.spacing[5]}`};
+`;
+
+const Item = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: ${({ theme }) => `${theme.spacing[6]}`};
+  font-size: ${({ theme }) => theme.typography.body2.fontSize};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border-radius: 12px;
 `;
