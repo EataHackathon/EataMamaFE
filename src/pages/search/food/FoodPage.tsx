@@ -3,6 +3,7 @@ import { FoodItem } from './components';
 import { Typography } from '@/components/common';
 import { useLocation } from 'react-router-dom';
 import { useGetAIFood } from '../hooks';
+import { ItemInfoSection } from '../components';
 
 const FoodPage = () => {
   const location = useLocation();
@@ -15,26 +16,37 @@ const FoodPage = () => {
   }
 
   return (
-    <Container>
-      <Box>
-        <Typography variant='subtitle' weight='bold'>
-          성분 및 재료 분석
-        </Typography>
-      </Box>
-      {myData.ai.ingredientsAnalysis.map((ingredient, index) => (
-        <FoodItem
-          key={ingredient.name}
-          number={index + 1}
-          ingredient={ingredient}
-        />
-      ))}
-      <Box>
-        <Typography variant='subtitle' weight='bold'>
-          최종 정리
-        </Typography>
-        <Typography variant='body3'>{myData.ai.finalSummary}</Typography>
-      </Box>
-    </Container>
+    <>
+      <ItemInfoSection
+        name={myData.item.foodName}
+        gram={myData.item.gram}
+        kcal={myData.item.foodKcal}
+        carbo={myData.item.carbo}
+        protein={myData.item.protein}
+        fat={myData.item.fat}
+        dietaryFiber={myData.item.dietaryFiber}
+      />
+      <Container>
+        <Box>
+          <Typography variant='subtitle' weight='bold'>
+            성분 및 재료 분석
+          </Typography>
+        </Box>
+        {myData.ai.ingredientsAnalysis.map((ingredient, index) => (
+          <FoodItem
+            key={ingredient.name}
+            number={index + 1}
+            ingredient={ingredient}
+          />
+        ))}
+        <Box>
+          <Typography variant='subtitle' weight='bold'>
+            최종 정리
+          </Typography>
+          <Typography variant='body3'>{myData.ai.finalSummary}</Typography>
+        </Box>
+      </Container>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { IngredientItem } from './components';
 import { useLocation } from 'react-router-dom';
 import { useGetAIIngredient } from '../hooks';
+import { ItemInfoSection } from '../components';
 
 const IngredientPage = () => {
   const location = useLocation();
@@ -16,17 +17,28 @@ const IngredientPage = () => {
   }
 
   return (
-    <Container>
-      {myData.data.ai.recommendations.map((ingredient, index) => (
-        <IngredientItem
-          key={ingredient.title}
-          title={ingredient.title}
-          number={index + 1}
-          summary={ingredient.summary}
-          whyGood={ingredient.whyGood}
-        />
-      ))}
-    </Container>
+    <>
+      <ItemInfoSection
+        name={myData.data.item.ingredientName}
+        gram={myData.data.item.gram}
+        kcal={myData.data.item.ingredientKcal}
+        carbo={myData.data.item.carbo}
+        protein={myData.data.item.protein}
+        fat={myData.data.item.fat}
+        dietaryFiber={myData.data.item.dietaryFiber}
+      />
+      <Container>
+        {myData.data.ai.recommendations.map((ingredient, index) => (
+          <IngredientItem
+            key={ingredient.title}
+            title={ingredient.title}
+            number={index + 1}
+            summary={ingredient.summary}
+            whyGood={ingredient.whyGood}
+          />
+        ))}
+      </Container>
+    </>
   );
 };
 

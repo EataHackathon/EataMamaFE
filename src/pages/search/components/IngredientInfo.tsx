@@ -2,25 +2,52 @@ import { Typography } from '@/components/common';
 import styled from '@emotion/styled';
 
 type IngredientInfoProps = {
-  ingredientData: {
-    name: string;
-    amount: string;
-  }[];
+  carbo: number;
+  protein: number;
+  fat: number;
+  dietaryFiber: number;
 };
 
-const IngredientInfo = ({ ingredientData }: IngredientInfoProps) => {
+const IngredientInfo = ({
+  carbo,
+  protein,
+  fat,
+  dietaryFiber,
+}: IngredientInfoProps) => {
   return (
     <Grid>
-      {ingredientData.map((ingredient) => (
-        <Box key={ingredient.name}>
-          <Typography variant='body3' weight='medium' color='sub'>
-            {ingredient.name}
-          </Typography>
-          <Typography variant='body3' weight='medium' color='primary'>
-            {ingredient.amount}
-          </Typography>
-        </Box>
-      ))}
+      <Box>
+        <Typography variant='body3' weight='medium' color='sub'>
+          탄수화물
+        </Typography>
+        <Typography variant='body3' weight='medium' color='primary'>
+          {carbo}
+        </Typography>
+      </Box>
+      <Box>
+        <Typography variant='body3' weight='medium' color='sub'>
+          단백질
+        </Typography>
+        <Typography variant='body3' weight='medium' color='primary'>
+          {protein}
+        </Typography>
+      </Box>
+      <Box>
+        <Typography variant='body3' weight='medium' color='sub'>
+          지방
+        </Typography>
+        <Typography variant='body3' weight='medium' color='primary'>
+          {fat}
+        </Typography>
+      </Box>
+      <Box>
+        <Typography variant='body3' weight='medium' color='sub'>
+          식이섬유
+        </Typography>
+        <Typography variant='body3' weight='medium' color='primary'>
+          {dietaryFiber}
+        </Typography>
+      </Box>
     </Grid>
   );
 };
