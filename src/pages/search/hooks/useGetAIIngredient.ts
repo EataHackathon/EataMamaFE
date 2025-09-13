@@ -38,10 +38,14 @@ export type GetAIIngredientResult = {
   errorMessage: string | null;
 };
 
-export const useGetAIIngredient = () => {
+type GetAIIngredientParams = {
+  data: { ingredientName: string };
+};
+
+export const useGetAIIngredient = ({ data }: GetAIIngredientParams) => {
   const { data: myData, isPending } = useQuery<GetAIIngredientResult>({
-    queryKey: ['aiIngredient'],
-    queryFn: getAIIngredient,
+    queryKey: ['aiIngredient', data.ingredientName],
+    queryFn: () => getAIIngredient({ data }),
   });
   return { myData, isPending };
 };

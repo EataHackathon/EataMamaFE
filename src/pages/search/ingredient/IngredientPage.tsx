@@ -1,11 +1,23 @@
 import styled from '@emotion/styled';
 import { IngredientItem } from './components';
-import { ingredientData } from './mock/ingredientData';
+import { useLocation } from 'react-router-dom';
+import { useGetAIIngredient } from '../hooks';
 
 const IngredientPage = () => {
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const name = urlParams.get('name') || '';
+  const { myData, isPending } = useGetAIIngredient({
+    data: { ingredientName: name },
+  });
+
+  if (isPending || !myData) {
+    return null;
+  }
+
   return (
     <Container>
-      {ingredientData.map((ingredient, index) => (
+      {myData.data.ai.recommendations.map((ingredient, index) => (
         <IngredientItem
           key={ingredient.title}
           title={ingredient.title}
