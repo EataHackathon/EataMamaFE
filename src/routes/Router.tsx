@@ -14,6 +14,7 @@ import {
   NotFoundPage,
   SearchPage,
   FoodInfoPage,
+  AddFoodPage,
 } from '@/pages';
 import { SearchResultPage } from '@/pages/search-result';
 
@@ -47,6 +48,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <CalendarPage />,
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.ADD_FOOD,
+    element: <AppLayout headerLayoutType='center' />,
+    children: [
+      {
+        index: true,
+        element: <AddFoodPage />,
       },
     ],
   },
