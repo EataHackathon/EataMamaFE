@@ -124,6 +124,16 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: ROUTE_PATH.CALLBACK_OAUTH,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <CallbackPage />,
+      },
+    ],
+  },
+  {
     path: '*',
     element: <NotFoundPage />,
   },
