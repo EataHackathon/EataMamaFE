@@ -9,6 +9,10 @@ import lunch from '@/assets/lunch.png';
 import dinner from '@/assets/dinner.png';
 
 import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useGetMeal } from './hooks';
+import { useTitleStore } from '@/stores';
 
 const currentIntake = [
   { id: 1, label: '탄수화물', key: 'carbohydrate', value: 92, unit: 'g' },
@@ -26,6 +30,111 @@ const intake: { [key: string]: number } = {
 };
 
 const DietPage = () => {
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth() + 1;
+  const day = new Date().getDate();
+  const { setTitle, setLogDate } = useTitleStore();
+
+  useEffect(() => {
+    setTitle(`${year}월 ${month}월 ${day}일`);
+    setLogDate(
+      `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(
+        2,
+        '0',
+      )}`,
+    );
+  }, [setTitle, setLogDate, year, month, day]);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const urlParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search],
+  );
+  const type = urlParams.get('type') || 'FOOD';
+  const logDate = useTitleStore((state) => state.logDate);
+  const { mealData, isPending } = useGetMeal({ logDate });
+
+  useEffect(() => {
+    if (!urlParams.get('type')) {
+      urlParams.set('type', 'FOOD');
+      navigate(`${location.pathname}?${urlParams.toString()}`, {
+        replace: true,
+      });
+    }
+  }, [location.pathname, navigate, urlParams]);
+
+  if (isPending) {
+    return null;
+  }
+
+  const typeButtonClick = (buttonType: string) => {
+    urlParams.set('type', buttonType);
+    navigate(`${location.pathname}?${urlParams.toString()}`, { replace: true });
+  };
+
+  if (!mealData) {
+    return (
+      <>
+        <Search>
+          <ButtonContainer>
+            <Button
+              variant={type === 'FOOD' ? 'primary' : 'disabled'}
+              onClick={() => {
+                typeButtonClick('FOOD');
+              }}
+            >
+              음식 검색
+            </Button>
+            <Button
+              variant={type === 'INGREDIENT' ? 'primary' : 'disabled'}
+              onClick={() => {
+                typeButtonClick('INGREDIENT');
+              }}
+            >
+              재료 검색
+            </Button>
+          </ButtonContainer>
+          <SearchBar />
+        </Search>
+
+        <Meal>
+          <MealCard
+            title='아침'
+            imageUrl={breakfast}
+            description={null}
+            tags={null}
+            calories={null}
+          />
+          <MealCard
+            title='점심'
+            imageUrl={lunch}
+            description={null}
+            tags={null}
+            calories={null}
+          />
+          <MealCard
+            title='저녁'
+            imageUrl={dinner}
+            description={null}
+            tags={null}
+            calories={null}
+          />
+        </Meal>
+      </>
+    );
+  }
+
+  const breakfastMeal = mealData.data.meals.find(
+    (meal) => meal.mealType === 'BREAKFAST',
+  );
+  const lunchMeal = mealData.data.meals.find(
+    (meal) => meal.mealType === 'LUNCH',
+  );
+  const dinnerMeal = mealData.data.meals.find(
+    (meal) => meal.mealType === 'DINNER',
+  );
+
   // 1. 퍼센트 계산 로직을 페이지 레벨에서 수행
   const nutrientDataForChart = currentIntake.map((data) => {
     const recommendedValue = intake[data.key];
@@ -38,8 +147,22 @@ const DietPage = () => {
     <>
       <Search>
         <ButtonContainer>
-          <Button variant='primary'>음식 검색</Button>
-          <Button variant='disabled'>재료 검색</Button>
+          <Button
+            variant={type === 'FOOD' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('FOOD');
+            }}
+          >
+            음식 검색
+          </Button>
+          <Button
+            variant={type === 'INGREDIENT' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('INGREDIENT');
+            }}
+          >
+            재료 검색
+          </Button>
         </ButtonContainer>
         <SearchBar />
       </Search>
@@ -48,23 +171,23 @@ const DietPage = () => {
         <MealCard
           title='아침'
           imageUrl={breakfast}
-          description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
-          tags='샐러드'
-          calories={215}
+          description={breakfastMeal?.mealAdvice || null}
+          tags={breakfastMeal?.mealName || null}
+          calories={breakfastMeal?.intakes || null}
         />
         <MealCard
           title='점심'
           imageUrl={lunch}
           description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
           tags='도시락'
-          calories={472}
+          calories={lunchMeal?.intakes || null}
         />
         <MealCard
           title='저녁'
           imageUrl={dinner}
           description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
           tags='로제마라샹궈'
-          calories={552}
+          calories={dinnerMeal?.intakes || null}
         />
       </Meal>
 

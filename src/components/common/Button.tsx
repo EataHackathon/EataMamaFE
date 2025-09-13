@@ -13,11 +13,9 @@ type StyledButtonProps = {
 };
 
 const Button = ({ children, variant = 'primary', ...rest }: ButtonProps) => {
-  const isDisabled = variant === 'disabled';
-
   return (
-    <StyledButton variant={variant} disabled={isDisabled} {...rest}>
-      {variant === 'primary' && !isDisabled && <Check size={20} />}
+    <StyledButton variant={variant} {...rest}>
+      {variant === 'primary' && <Check size={20} />}
       {children}
     </StyledButton>
   );

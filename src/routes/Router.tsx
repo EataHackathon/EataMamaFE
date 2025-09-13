@@ -15,6 +15,7 @@ import {
   SearchPage,
   FoodInfoPage,
 } from '@/pages';
+import { SearchResultPage } from '@/pages/search-result';
 
 const router = createBrowserRouter([
   {
@@ -73,7 +74,9 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.MY,
-    element: <AppLayout headerLayoutType='center' />,
+    element: (
+      <AppLayout headerLayoutType='center' navigationLayoutType='navigation' />
+    ),
     children: [
       {
         index: true,
@@ -101,7 +104,18 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: ROUTE_PATH.RESULT,
+    element: <AppLayout navigationLayoutType='navigation' />,
+    children: [
+      {
+        index: true,
+        element: <SearchResultPage />,
+      },
+    ],
+  },
+  {
     path: ROUTE_PATH.CALLBACK,
+    element: <AppLayout />,
     children: [
       {
         index: true,
