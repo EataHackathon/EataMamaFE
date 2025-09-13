@@ -21,7 +21,7 @@ const IngredientInfo = ({
           탄수화물
         </Typography>
         <Typography variant='body3' weight='medium' color='primary'>
-          {carbo}
+          {carbo}g
         </Typography>
       </Box>
       <Box>
@@ -29,7 +29,7 @@ const IngredientInfo = ({
           단백질
         </Typography>
         <Typography variant='body3' weight='medium' color='primary'>
-          {protein}
+          {protein}g
         </Typography>
       </Box>
       <Box>
@@ -37,7 +37,7 @@ const IngredientInfo = ({
           지방
         </Typography>
         <Typography variant='body3' weight='medium' color='primary'>
-          {fat}
+          {fat}g
         </Typography>
       </Box>
       <Box>
@@ -45,7 +45,7 @@ const IngredientInfo = ({
           식이섬유
         </Typography>
         <Typography variant='body3' weight='medium' color='primary'>
-          {dietaryFiber}
+          {dietaryFiber}g
         </Typography>
       </Box>
     </Grid>
