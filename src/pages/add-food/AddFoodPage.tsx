@@ -121,8 +121,8 @@ const SelectedItemChip = styled.div`
   align-items: center;
   gap: 4px;
   padding: 6px 10px;
-  background-color: #fce4ec;
-  color: #c2185b;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   border-radius: 16px;
   font-size: 14px;
 

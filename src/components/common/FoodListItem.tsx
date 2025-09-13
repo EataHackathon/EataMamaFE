@@ -56,14 +56,14 @@ const Name = styled.p`
 const Amount = styled.p`
   margin: 4px 0 0;
   font-size: 14px;
-  color: #868e96;
+  color: ${({ theme }) => theme.colors.text.sub};
 `;
 
 const Calories = styled.p`
   margin: 0 16px;
   font-size: 16px;
   font-weight: bold;
-  color: #343a40;
+  color: ${({ theme }) => theme.colors.gray[80]};
 `;
 
 const ActionButton = styled.button<{ isSelected: boolean }>`
@@ -73,8 +73,12 @@ const ActionButton = styled.button<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${({ isSelected }) => (isSelected ? '#e91e63' : '#dee2e6')};
-  background-color: ${({ isSelected }) => (isSelected ? '#e91e63' : 'white')};
-  color: ${({ isSelected }) => (isSelected ? 'white' : '#495057')};
+  border: 1px solid
+    ${({ theme, isSelected }) =>
+      isSelected ? theme.colors.primary : theme.colors.gray[10]};
+  background-color: ${({ theme, isSelected }) =>
+    isSelected ? theme.colors.primary : theme.colors.gray[0]};
+  color: ${({ theme, isSelected }) =>
+    isSelected ? theme.colors.text.white : theme.colors.gray[80]};
   cursor: pointer;
 `;
