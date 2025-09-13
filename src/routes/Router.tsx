@@ -102,7 +102,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.RESULT,
-    element: <AppLayout layoutType='navigation' />,
+    element: <AppLayout navigationLayoutType='navigation' />,
     children: [
       {
         index: true,
@@ -112,7 +112,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.CALLBACK,
-    element: <AppLayout layoutType='none' />,
+    element: <AppLayout />,
     children: [
       {
         index: true,
