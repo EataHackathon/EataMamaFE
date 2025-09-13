@@ -1,5 +1,4 @@
-// 📍 src/components/main/NutrientChart.tsx
-
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'; // 기본 스타일 import
@@ -9,7 +8,6 @@ type NutrientChartProps = {
   value: number;
   unit: string;
   percentage: number;
-  color: string;
 };
 
 export const NutrientChart = ({
@@ -17,16 +15,17 @@ export const NutrientChart = ({
   value,
   unit,
   percentage,
-  color,
 }: NutrientChartProps) => {
+  const theme = useTheme();
+
   return (
     <ChartWrapper>
       <ProgressBarWrapper>
         <CircularProgressbar
           value={percentage}
           styles={buildStyles({
-            pathColor: color, // 프로그레스 바 색상
-            trailColor: '#FFEDF3', // 배경 트랙 색상
+            pathColor: theme.colors.primary, // 프로그레스 바 색상
+            trailColor: theme.colors.secondary, // 배경 트랙 색상
           })}
         />
         <ValueText>{`${value}${unit}`}</ValueText>

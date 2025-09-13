@@ -24,7 +24,7 @@ const TimeSection = ({ mealTime, setMealTime }: TimeSectionProps) => {
 export default TimeSection;
 
 const Section = styled.section`
-  padding: ${({ theme }) => theme.spacing[6]};
+  padding: ${({ theme }) => theme.spacing[9]};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing[2]};

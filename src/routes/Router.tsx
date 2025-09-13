@@ -19,7 +19,9 @@ import { SearchResultPage } from '@/pages/search-result';
 const router = createBrowserRouter([
   {
     path: ROUTE_PATH.HOME,
-    element: <AppLayout layoutType='left' />,
+    element: (
+      <AppLayout headerLayoutType='left' navigationLayoutType='navigation' />
+    ),
     children: [
       {
         index: true,
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.LOGIN,
-    element: <AppLayout layoutType='none' />,
+    element: <AppLayout />,
     children: [
       {
         index: true,
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.CALENDAR,
-    element: <AppLayout layoutType='navigation' />,
+    element: <AppLayout navigationLayoutType='navigation' />,
     children: [
       {
         index: true,
@@ -49,7 +51,9 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.DIET,
-    element: <AppLayout layoutType='left' />,
+    element: (
+      <AppLayout headerLayoutType='left' navigationLayoutType='navigation' />
+    ),
     children: [
       {
         index: true,
@@ -59,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.MEAL_LOG,
-    element: <AppLayout layoutType='center' />,
+    element: <AppLayout headerLayoutType='center' />,
     children: [
       {
         index: true,
@@ -69,7 +73,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.MY,
-    element: <AppLayout layoutType='center' />,
+    element: <AppLayout headerLayoutType='center' />,
     children: [
       {
         index: true,
@@ -79,7 +83,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.SEARCH.ROOT,
-    element: <AppLayout layoutType='navigation' />,
+    element: <AppLayout navigationLayoutType='navigation' />,
     children: [
       {
         element: <SearchPage />,
