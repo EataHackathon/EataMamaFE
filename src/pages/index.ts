@@ -8,3 +8,4 @@ export * from './search';
 export * from './meal-log';
 export * from './callback';
 export * from './food-info';
+export * from './add-food';
