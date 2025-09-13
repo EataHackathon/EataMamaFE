@@ -10,12 +10,25 @@ import dinner from '@/assets/dinner.png';
 
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 const DietPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const urlParams = new URLSearchParams(location.search);
-  const type = urlParams.get('type') || 'INGRIDIENT';
+  const urlParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search],
+  );
+  const type = urlParams.get('type') || 'FOOD';
+
+  useEffect(() => {
+    if (!urlParams.get('type')) {
+      urlParams.set('type', 'FOOD');
+      navigate(`${location.pathname}?${urlParams.toString()}`, {
+        replace: true,
+      });
+    }
+  }, [location.pathname, navigate, urlParams]);
 
   const typeButtonClick = (buttonType: string) => {
     urlParams.set('type', buttonType);
@@ -27,17 +40,17 @@ const DietPage = () => {
       <Search>
         <ButtonContainer>
           <Button
-            variant={type === 'INGRIDIENT' ? 'primary' : 'disabled'}
+            variant={type === 'FOOD' ? 'primary' : 'disabled'}
             onClick={() => {
-              typeButtonClick('INGRIDIENT');
+              typeButtonClick('FOOD');
             }}
           >
             음식 검색
           </Button>
           <Button
-            variant={type === 'FOOD' ? 'primary' : 'disabled'}
+            variant={type === 'INGREDIENT' ? 'primary' : 'disabled'}
             onClick={() => {
-              typeButtonClick('FOOD');
+              typeButtonClick('INGREDIENT');
             }}
           >
             재료 검색
