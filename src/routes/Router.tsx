@@ -14,6 +14,7 @@ import {
   NotFoundPage,
   SearchPage,
 } from '@/pages';
+import { SearchResultPage } from '@/pages/search-result';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,16 @@ const router = createBrowserRouter([
             element: <FoodPage />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: ROUTE_PATH.RESULT,
+    element: <AppLayout layoutType='navigation' />,
+    children: [
+      {
+        index: true,
+        element: <SearchResultPage />,
       },
     ],
   },

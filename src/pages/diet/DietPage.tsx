@@ -9,6 +9,8 @@ import lunch from '@/assets/lunch.png';
 import dinner from '@/assets/dinner.png';
 
 import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 const currentIntake = [
   { id: 1, label: '탄수화물', key: 'carbohydrate', value: 92, unit: 'g' },
@@ -26,6 +28,29 @@ const intake: { [key: string]: number } = {
 };
 
 const DietPage = () => {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const urlParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search],
+  );
+  const type = urlParams.get('type') || 'FOOD';
+
+  useEffect(() => {
+    if (!urlParams.get('type')) {
+      urlParams.set('type', 'FOOD');
+      navigate(`${location.pathname}?${urlParams.toString()}`, {
+        replace: true,
+      });
+    }
+  }, [location.pathname, navigate, urlParams]);
+
+  const typeButtonClick = (buttonType: string) => {
+    urlParams.set('type', buttonType);
+    navigate(`${location.pathname}?${urlParams.toString()}`, { replace: true });
+  };
+
   // 1. 퍼센트 계산 로직을 페이지 레벨에서 수행
   const nutrientDataForChart = currentIntake.map((data) => {
     const recommendedValue = intake[data.key];
@@ -34,12 +59,27 @@ const DietPage = () => {
     return { ...data, percentage: Math.min(percentage, 200) };
   });
 
+
   return (
     <>
       <Search>
         <ButtonContainer>
-          <Button variant='primary'>음식 검색</Button>
-          <Button variant='disabled'>재료 검색</Button>
+          <Button
+            variant={type === 'FOOD' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('FOOD');
+            }}
+          >
+            음식 검색
+          </Button>
+          <Button
+            variant={type === 'INGREDIENT' ? 'primary' : 'disabled'}
+            onClick={() => {
+              typeButtonClick('INGREDIENT');
+            }}
+          >
+            재료 검색
+          </Button>
         </ButtonContainer>
         <SearchBar />
       </Search>
