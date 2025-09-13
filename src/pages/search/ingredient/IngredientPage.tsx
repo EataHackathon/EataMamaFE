@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import { IngredientItem } from './components';
 import { useLocation } from 'react-router-dom';
-import { useGetAIIngredient } from '../hooks';
+import { usePostAIIngredient } from '../hooks';
 import { ItemInfoSection } from '../components';
 
 const IngredientPage = () => {
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const name = urlParams.get('name') || '';
-  const { myData, isPending } = useGetAIIngredient({
+  const { myData, isPending } = usePostAIIngredient({
     data: { ingredientName: name },
   });
 

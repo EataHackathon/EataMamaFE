@@ -1,4 +1,4 @@
-import { getAIFood } from '@/api';
+import { postAIFood } from '@/api';
 import { useQuery } from '@tanstack/react-query';
 
 // 각 성분 분석 결과
@@ -28,20 +28,20 @@ export type AIFoodAnalysis = {
 };
 
 // 최종 응답 타입
-export type GetAIFoodResult = {
+export type PostAIFoodResult = {
   type: 'FOOD' | 'INGREDIENT'; // 서버에서 두 가지 가능성
   item: FoodItem;
   ai: AIFoodAnalysis;
 };
 
-export type UseGetAIFoodParams = {
+export type UsePostAIFoodParams = {
   data: { foodName: string };
 };
 
-export const useGetAIFood = ({ data }: UseGetAIFoodParams) => {
-  const { data: myData, isPending } = useQuery<GetAIFoodResult>({
+export const usePostAIFood = ({ data }: UsePostAIFoodParams) => {
+  const { data: myData, isPending } = useQuery<PostAIFoodResult>({
     queryKey: ['aiFood', data.foodName],
-    queryFn: () => getAIFood({ data }),
+    queryFn: () => postAIFood({ data }),
   });
   return { myData, isPending };
 };

@@ -1,13 +1,13 @@
 import { API_PATHS } from './apiPaths';
 import axiosInstance from './axiosInstance';
 
-type getAIIngredientParams = {
+type PostAIIngredientParams = {
   data: { ingredientName: string };
 };
 
-export const getAIIngredient = async ({ data }: getAIIngredientParams) => {
+export const postAIIngredient = async ({ data }: PostAIIngredientParams) => {
   try {
-    const response = await axiosInstance.get(API_PATHS.AI_INGREDIENT, {
+    const response = await axiosInstance.post(API_PATHS.AI_INGREDIENT, {
       params: data,
     });
     return response.data;

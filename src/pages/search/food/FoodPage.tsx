@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 import { FoodItem } from './components';
 import { Typography } from '@/components/common';
 import { useLocation } from 'react-router-dom';
-import { useGetAIFood } from '../hooks';
 import { ItemInfoSection } from '../components';
+import { usePostAIFood } from '../hooks';
 
 const FoodPage = () => {
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const name = urlParams.get('name') || '';
-  const { myData, isPending } = useGetAIFood({ data: { foodName: name } });
+  const { myData, isPending } = usePostAIFood({ data: { foodName: name } });
 
   if (isPending || !myData) {
     return null;

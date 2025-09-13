@@ -1,4 +1,4 @@
-import { getAIIngredient } from '@/api';
+import { postAIIngredient } from '@/api';
 import { useQuery } from '@tanstack/react-query';
 
 export type IngredientRecommendation = {
@@ -26,7 +26,7 @@ export type AIIngredientAnalysis = {
 };
 
 // 최종 응답 타입
-export type GetAIIngredientResult = {
+export type PostAIIngredientResult = {
   data: {
     type: 'INGREDIENT';
     item: IngredientItem;
@@ -38,14 +38,14 @@ export type GetAIIngredientResult = {
   errorMessage: string | null;
 };
 
-type GetAIIngredientParams = {
+type PostAIIngredientParams = {
   data: { ingredientName: string };
 };
 
-export const useGetAIIngredient = ({ data }: GetAIIngredientParams) => {
-  const { data: myData, isPending } = useQuery<GetAIIngredientResult>({
+export const usePostAIIngredient = ({ data }: PostAIIngredientParams) => {
+  const { data: myData, isPending } = useQuery<PostAIIngredientResult>({
     queryKey: ['aiIngredient', data.ingredientName],
-    queryFn: () => getAIIngredient({ data }),
+    queryFn: () => postAIIngredient({ data }),
   });
   return { myData, isPending };
 };
