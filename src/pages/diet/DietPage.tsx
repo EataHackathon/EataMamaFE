@@ -172,6 +172,7 @@ const DietPage = () => {
 
       <Meal>
         <MealCard
+          mealId={breakfastMeal?.mealId}
           title='아침'
           type='BREAKFAST'
           imageUrl={breakfast}
@@ -182,30 +183,49 @@ const DietPage = () => {
         <MealCard
           title='점심'
           type='LUNCH'
+          mealId={lunchMeal?.mealId}
           imageUrl={lunch}
-          description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
-          tags='도시락'
+          description={lunchMeal?.mealAdvice || null}
+          tags={lunchMeal?.mealName || null}
           calories={lunchMeal?.intakes || null}
         />
         <MealCard
           title='저녁'
           type='DINNER'
+          mealId={dinnerMeal?.mealId}
           imageUrl={dinner}
-          description='비타민과 섬유질이 풍부하지만,단백질을 더 섭취 하는게 좋아요'
-          tags='로제마라샹궈'
+          description={dinnerMeal?.mealAdvice || null}
+          tags={dinnerMeal?.mealName || null}
           calories={dinnerMeal?.intakes || null}
         />
       </Meal>
 
       <Analysis>
         <NutrientAnalysis
-          totalCalories={1239}
+          totalCalories={
+            breakfastMeal?.intakes.reduce(
+              (sum, intake) => sum + intake.intakeKcal,
+              0,
+            ) ||
+            0 +
+              (lunchMeal?.intakes.reduce(
+                (sum, intake) => sum + intake.intakeKcal,
+                0,
+              ) || 0) +
+              (dinnerMeal?.intakes.reduce(
+                (sum, intake) => sum + intake.intakeKcal,
+                0,
+              ) || 0)
+          }
           nutrientData={nutrientDataForChart}
         />
       </Analysis>
 
       <TodaySummary>
-        <Summary />
+        <Summary
+          dayLogId={mealData.data.dayLogId}
+          dailyAdvice={mealData.data.dailyAdvice}
+        />
       </TodaySummary>
     </>
   );

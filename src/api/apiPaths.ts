@@ -6,4 +6,7 @@ export const API_PATHS = {
   MEAL: `/api/meal`,
 
   SEARCH_MEAL: `/api/search/meal`,
+
+  AI_DAY_ADVICE: (mealId: number) => `/api/ai/meals/${mealId}/advice`,
+  AI_MEAL_ADVICE: (dayLogId: number) => `/api/ai/day-logs/${dayLogId}/advice`,
 };

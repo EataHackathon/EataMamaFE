@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { Plus } from 'lucide-react';
-import type { Intake } from '../hooks';
+import { usePostMealAdvice, type Intake } from '../hooks';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 type MealCardProps = {
+  mealId?: number;
   title: string;
   type: string;
   imageUrl: string;
@@ -13,6 +15,7 @@ type MealCardProps = {
 };
 
 const MealCard = ({
+  mealId,
   type,
   tags,
   calories,
@@ -22,6 +25,13 @@ const MealCard = ({
 }: MealCardProps) => {
   const gotoMealLog = (type: string) =>
     `/meal-log?title=${encodeURIComponent(type)}`;
+  const { postMealAdviceMutate } = usePostMealAdvice();
+
+  useEffect(() => {
+    if (mealId) {
+      postMealAdviceMutate(mealId);
+    }
+  }, [mealId, postMealAdviceMutate]);
 
   return (
     <CardContainer>
@@ -33,8 +43,12 @@ const MealCard = ({
             <Plus color='white' size={22} />
           </PlusButton>
         </TitleContainer>
-        {description && <Description>{description}</Description>}
-        {tags && calories && (
+        {description ? (
+          <Description>{description}</Description>
+        ) : (
+          <Description></Description>
+        )}
+        {calories && (
           <TagContainer>
             <Tag>{tags}</Tag>
             <Calories>
