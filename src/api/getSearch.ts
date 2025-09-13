@@ -48,11 +48,10 @@ export type SearchResponse = {
 export const getSearchResults = async (
   query: string,
   type: string,
-  lastId: number,
 ): Promise<SearchResponse> => {
   try {
     const response = await axiosInstance.get<SearchResponse>(API_PATHS.SEARCH, {
-      params: { name: query, type, lastId },
+      params: { name: query, type },
     });
     return response.data;
   } catch (error) {

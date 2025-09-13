@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getSearchResults } from '@/api';
+import { getSearchResults, type SearchResponse } from '@/api';
 
 export const useGetSearch = (query: string, type: string) => {
-  return useInfiniteQuery({
+  return useInfiniteQuery<SearchResponse>({
     queryKey: ['searchResults', query, type],
-    queryFn: ({ pageParam = 0 }) => getSearchResults(query, type, pageParam),
+    queryFn: () => getSearchResults(query, type),
     getNextPageParam: (lastPage) =>
-      lastPage.data.last ? undefined : lastPage.data.number + 1,
-    initialPageParam: 0,
+      lastPage.data.last ? undefined : lastPage.data.number,
+    initialPageParam: -1,
   });
 };
