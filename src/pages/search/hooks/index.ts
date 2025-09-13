@@ -1,2 +1,2 @@
-export * from './useGetAIFood';
-export * from './useGetAIIngredient';
+export * from './usePostAIFood';
+export * from './usePostAIIngredient';
