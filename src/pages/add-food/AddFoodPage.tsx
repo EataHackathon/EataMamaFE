@@ -7,11 +7,12 @@ import Button2 from '@/components/common/Button2';
 import FoodListItem from '@/components/common/FoodListItem';
 import { useGetSearchMeal } from './hooks';
 import type { Food } from '@/api/getSearchMeal';
+import { useFoodStore } from '@/stores/foodStore';
 
 const AddFoodPage = () => {
   const navigate = useNavigate();
 
-  const [selectedItems, setSelectedItems] = useState<Food[]>([]);
+  const { selectedFoods, toggleFood } = useFoodStore();
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const [searchTerm, setSearchTerm] = useState(
@@ -22,16 +23,12 @@ const AddFoodPage = () => {
 
   if (isPending || !items) return null;
   const handleToggleItem = (item: Food) => {
-    setSelectedItems((prev) =>
-      prev.find((prevItem) => prevItem.id === item.id)
-        ? prev.filter((prevItem) => prevItem.id !== item.id)
-        : [...prev, item],
-    );
+    toggleFood(item);
   };
 
   const handleConfirm = () => {
-    if (selectedItems.length === 0) return; // 선택된 아이템 없으면 동작 안 함
-    console.log('최종 추가된 음식:', selectedItems);
+    if (selectedFoods.length === 0) return; // 선택된 아이템 없으면 동작 안 함
+    console.log('최종 추가된 음식:', selectedFoods);
     navigate(-1);
   };
 
@@ -61,7 +58,7 @@ const AddFoodPage = () => {
 
       <ItemList>
         {items.map((item, index) => {
-          const isSelected = selectedItems.some(
+          const isSelected = selectedFoods.some(
             (selected) => selected.id === item.id,
           );
           return (
@@ -76,9 +73,9 @@ const AddFoodPage = () => {
       </ItemList>
 
       <SelectBox>
-        {selectedItems.length > 0 && (
+        {selectedFoods.length > 0 && (
           <SelectedItems>
-            {selectedItems.map((item, index) => (
+            {selectedFoods.map((item, index) => (
               <SelectedItemChip key={`${item.id}-${index}`}>
                 {item.name}
                 <X size={14} onClick={() => handleToggleItem(item)} />
@@ -90,7 +87,7 @@ const AddFoodPage = () => {
 
       <ButtonSection>
         <Button2
-          variant={selectedItems.length > 0 ? 'primary' : 'disabled'}
+          variant={selectedFoods.length > 0 ? 'primary' : 'disabled'}
           onClick={handleConfirm}
         >
           추가하기
