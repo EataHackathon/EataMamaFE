@@ -17,14 +17,19 @@ const SearchBar = () => {
   };
 
   return (
-    <SearchContainer>
+    <SearchContainer
+      onSubmit={(e) => {
+        e.preventDefault();
+        searchClick();
+      }}
+    >
       <SearchInput
         type='text'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder='음식 이름을 검색하세요'
       />
-      <SearchIcon onClick={searchClick}>
+      <SearchIcon type='submit'>
         <Search size={40} color='#e91e63' />
       </SearchIcon>
     </SearchContainer>
@@ -33,7 +38,7 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-const SearchContainer = styled.div`
+const SearchContainer = styled.form`
   display: flex;
   gap: 10px;
   margin: 20px 0;
@@ -49,6 +54,6 @@ const SearchInput = styled.input`
 
   box-sizing: border-box;
 `;
-const SearchIcon = styled.div`
+const SearchIcon = styled.button`
   cursor: pointer;
 `;

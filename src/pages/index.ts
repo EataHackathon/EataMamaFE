@@ -7,3 +7,4 @@ export * from './login';
 export * from './search';
 export * from './meal-log';
 export * from './callback';
+export * from './food-info';

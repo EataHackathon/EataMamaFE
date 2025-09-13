@@ -6,6 +6,7 @@ export const ROUTE_PATH = {
   MY: '/my',
 
   MEAL_LOG: '/meal-log',
+  FOOD_INFO: '/food-info',
 
   SEARCH: {
     ROOT: '/search',
