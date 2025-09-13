@@ -4,4 +4,6 @@ export const API_PATHS = {
   AI_FOOD: `/api/ai/search/food/detail`,
   AI_INGREDIENT: `/api/ai/search/ingredient/detail`,
   MEAL: `/api/meal`,
+
+  SEARCH_MEAL: `/api/search/meal`,
 };

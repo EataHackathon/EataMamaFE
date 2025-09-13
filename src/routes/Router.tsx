@@ -53,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE_PATH.ADD_FOOD,
-    element: <AppLayout headerLayoutType='center' />,
+    element: <AppLayout />,
     children: [
       {
         index: true,

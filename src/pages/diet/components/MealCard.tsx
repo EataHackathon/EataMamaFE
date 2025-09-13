@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Plus } from 'lucide-react';
 import type { Intake } from '../hooks';
+import { Link } from 'react-router-dom';
 
 type MealCardProps = {
   title: string;
@@ -17,13 +18,16 @@ const MealCard = ({
   title,
   imageUrl,
 }: MealCardProps) => {
+  const gotoMealLog = (title: string) =>
+    `/meal-log?title=${encodeURIComponent(title)}`;
+
   return (
     <CardContainer>
       <MealImage src={imageUrl} />
       <ContentContainer>
         <TitleContainer>
           <Title>{title}</Title>
-          <PlusButton>
+          <PlusButton to={gotoMealLog(title)}>
             <Plus color='white' size={22} />
           </PlusButton>
         </TitleContainer>
@@ -90,7 +94,7 @@ const TagContainer = styled.div`
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
 `;
 
-const PlusButton = styled.button`
+const PlusButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

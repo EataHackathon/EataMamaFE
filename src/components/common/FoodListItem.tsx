@@ -1,16 +1,10 @@
 import { memo } from 'react';
 import styled from '@emotion/styled';
 import { Plus, Check } from 'lucide-react';
-
-interface FoodItem {
-  id: number;
-  name: string;
-  amount: string;
-  calories: number;
-}
+import type { Food } from '@/api/getSearchMeal';
 
 interface FoodListItemProps {
-  item: FoodItem;
+  item: Food;
   isSelected: boolean;
   onToggle: () => void;
 }
@@ -21,9 +15,9 @@ const FoodListItem = memo(
       <ItemWrapper onClick={onToggle}>
         <Info>
           <Name>{item.name}</Name>
-          <Amount>{item.amount}</Amount>
+          <Amount>{item.gram}g</Amount>
         </Info>
-        <Calories>{item.calories.toLocaleString()}kcal</Calories>
+        <Calories>{item.kcal}kcal</Calories>
         <ActionButton isSelected={isSelected}>
           {isSelected ? <Check size={20} /> : <Plus size={20} />}
         </ActionButton>
@@ -37,7 +31,7 @@ export default FoodListItem;
 const ItemWrapper = styled.li`
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: ${({ theme }) => `${theme.spacing[4]} ${theme.spacing[8]}`};
   background-color: ${({ theme }) => theme.colors.background};
   border-bottom: 1px solid #f1f3f5;
   cursor: pointer;

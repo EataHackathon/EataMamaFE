@@ -1,34 +1,27 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
-import SearchBar from '@/components/common/SearchBar';
 import Button2 from '@/components/common/Button2';
 import FoodListItem from '@/components/common/FoodListItem';
-
-interface FoodItem {
-  id: number;
-  name: string;
-  amount: string;
-  calories: number;
-}
-
-// 목업 데이터
-const mockFoodItems: FoodItem[] = [
-  { id: 1, name: '샐러드', amount: '120g', calories: 147 },
-  { id: 2, name: '샐러드', amount: '242g', calories: 290 },
-  { id: 3, name: '샐러드볼', amount: '200g', calories: 200 },
-  { id: 4, name: '콥샐러드', amount: '200g', calories: 451.6 },
-  { id: 5, name: '햄샐러드', amount: '350g', calories: 110 },
-];
+import { useGetSearchMeal } from './hooks';
+import type { Food } from '@/api/getSearchMeal';
 
 const AddFoodPage = () => {
   const navigate = useNavigate();
-  const [items] = useState<FoodItem[]>(mockFoodItems);
-  const [selectedItems, setSelectedItems] = useState<FoodItem[]>([]);
 
-  const handleToggleItem = (item: FoodItem) => {
+  const [selectedItems, setSelectedItems] = useState<Food[]>([]);
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const [searchTerm, setSearchTerm] = useState(
+    () => urlParams.get('query') || '',
+  );
+  const { data, isPending } = useGetSearchMeal(searchTerm);
+  const items = data?.pages.flatMap((page) => page.data.content) ?? [];
+
+  if (isPending || !items) return null;
+  const handleToggleItem = (item: Food) => {
     setSelectedItems((prev) =>
       prev.find((prevItem) => prevItem.id === item.id)
         ? prev.filter((prevItem) => prevItem.id !== item.id)
@@ -42,18 +35,38 @@ const AddFoodPage = () => {
     navigate(-1);
   };
 
+  const searchClick = () => {
+    urlParams.set('query', searchTerm);
+    navigate(`${location.pathname}?${urlParams.toString()}`);
+  };
+
   return (
     <Container>
-      <SearchBar />
+      <SearchContainer
+        onSubmit={(e) => {
+          e.preventDefault();
+          searchClick();
+        }}
+      >
+        <SearchInput
+          type='text'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder='음식 이름을 검색하세요'
+        />
+        <SearchIcon type='submit'>
+          <Search size={40} color='#e91e63' />
+        </SearchIcon>
+      </SearchContainer>
 
       <ItemList>
-        {items.map((item) => {
+        {items.map((item, index) => {
           const isSelected = selectedItems.some(
             (selected) => selected.id === item.id,
           );
           return (
             <FoodListItem
-              key={item.id}
+              key={`${item.id}-${index}`}
               item={item}
               isSelected={isSelected}
               onToggle={() => handleToggleItem(item)}
@@ -62,16 +75,18 @@ const AddFoodPage = () => {
         })}
       </ItemList>
 
-      {selectedItems.length > 0 && (
-        <SelectedItems>
-          {selectedItems.map((item) => (
-            <SelectedItemChip key={item.id}>
-              {item.name}
-              <X size={14} onClick={() => handleToggleItem(item)} />
-            </SelectedItemChip>
-          ))}
-        </SelectedItems>
-      )}
+      <SelectBox>
+        {selectedItems.length > 0 && (
+          <SelectedItems>
+            {selectedItems.map((item, index) => (
+              <SelectedItemChip key={`${item.id}-${index}`}>
+                {item.name}
+                <X size={14} onClick={() => handleToggleItem(item)} />
+              </SelectedItemChip>
+            ))}
+          </SelectedItems>
+        )}
+      </SelectBox>
 
       <ButtonSection>
         <Button2
@@ -89,6 +104,7 @@ export default AddFoodPage;
 
 const Container = styled.div`
   display: flex;
+  min-height: 100dvh;
   flex-direction: column;
   height: 100%;
 `;
@@ -129,4 +145,31 @@ const SelectedItemChip = styled.div`
   svg {
     cursor: pointer;
   }
+`;
+
+const SearchContainer = styled.form`
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+`;
+const SearchInput = styled.input`
+  width: 78%;
+  height: 56px;
+  border: 3px solid ${(props) => props.theme.colors.primary};
+  border-radius: 30px;
+  padding: 0 ${(props) => props.theme.spacing[4]};
+
+  box-sizing: border-box;
+`;
+const SearchIcon = styled.button`
+  cursor: pointer;
+`;
+
+const SelectBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: ${({ theme }) => theme.spacing[6]};
 `;
